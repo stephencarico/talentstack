@@ -66,20 +66,36 @@ var LoginPage = {
       errors: []
     };
   },
-  created: function() {},
-  methods: {},
-  computed: {}
+  methods: {
+    submit: function() {
+      var params = {
+        auth: { email: this.email, password: this.password }
+      };
+      axios
+        .post("/user_token", params)
+        .then(function(response) {
+          axios.defaults.headers.common["Authorization"] =
+            "Bearer " + response.data.jwt;
+          localStorage.setItem("jwt", response.data.jwt);
+          router.push("/");
+        })
+        .catch(
+          function(error) {
+            this.errors = ["Invalid email or password."];
+            this.email = "";
+            this.password = "";
+          }.bind(this)
+        );
+    }
+  }
 };
 
 var LogoutPage = {
-  template: "#logout-page",
-  data: function() {
-    return {
-    };
-  },
-  created: function() {},
-  methods: {},
-  computed: {}
+  created: function() {
+    axios.defaults.headers.common["Authorization"] = undefined;
+    localStorage.removeItem("jwt");
+    router.push("/");
+  }
 };
 
 var router = new VueRouter({
