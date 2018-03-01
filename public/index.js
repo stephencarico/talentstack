@@ -98,13 +98,29 @@ var LogoutPage = {
   }
 };
 
+var UsersShowPage = {
+  template: "#user-show-page",
+  data: function() {
+    return {
+      user: {}
+    };
+  },
+  created: function() {
+    axios.get("/users/" + this.$route.params.id).then(function(response) {
+      console.log(response.data);
+      this.user = response.data;
+    }.bind(this));
+  }
+};
+
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
     { path: "/newpost", component: PostNewPage },
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
-    { path: "/logout", component: LogoutPage }
+    { path: "/logout", component: LogoutPage },
+    { path: "/users/:id", component: UsersShowPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
