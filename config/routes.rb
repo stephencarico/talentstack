@@ -1,19 +1,13 @@
 Rails.application.routes.draw do
 
-  # USERS
+  get 'home/index'
+
+  resources :posts do 
+    resources :comments
+  end
+  resources :tags
   post 'user_token' => 'user_token#create'
-  post "/users" => "users#create"
-  get "/users/:id" => "users#show"
-  patch "/users/:id" => "users#update"
-  delete "/users/:id" => "users#destroy"
-
-  # POSTS
-
-
-  # COMMENTS
-
-
-  # TAGS
-
+  resources :users
+  # QUESTION: can we place users in a v1?
 
 end
