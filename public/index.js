@@ -103,26 +103,63 @@ var UsersShowPage = {
   }
 };
 
-var PostNewPage = {
-  template: "#post-new-page",
+var PostsNewPage = {
+  template: "#posts-new-page",
   data: function() {
     return {
+      title: "",
+      body: "",
+      errors: []
     };
   },
-  created: function() {},
+  methods: {
+    submit: function() {
+      var params = {
+        title: this.title,
+        body: this.body
+      };
+      axios
+        .post("/posts", params)
+        .then(function(response) {
+          router.push("/")
+        })
+        .catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this))
+    }
+  },
+  computed: {}
+};
+
+var PostsIndexPage = {
+  template: "#posts-index-page",
+  data: function() {
+    return {
+      posts: []
+    };
+  },
+  created: function() {
+    axios.get("/posts").then(function(response) {
+
+      this.posts = response.data
+      console.log(response.data)
+    }.bind(this))
+  },
   methods: {},
   computed: {}
 };
 
+
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
-    { path: "/newpost", component: PostNewPage },
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
     { path: "/users", component: UsersShowPage },
-    { path: "/posts", component: PostNewPage }
+    { path: "/posts/new", component: PostsNewPage },
+    { path: "/posts", component: PostsIndexPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };

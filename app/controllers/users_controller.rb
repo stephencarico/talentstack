@@ -21,8 +21,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = current_user
-    render json: user.as_json
+    @user = current_user
+    render json: @user.as_json
   end
 
 end
