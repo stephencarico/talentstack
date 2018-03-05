@@ -11,17 +11,6 @@ var HomePage = {
   computed: {}
 };
 
-var PostNewPage = {
-  template: "#post-new-page",
-  data: function() {
-    return {
-    };
-  },
-  created: function() {},
-  methods: {},
-  computed: {}
-};
-
 var SignupPage = {
   template: "#signup-page",
   data: function() {
@@ -77,6 +66,7 @@ var LoginPage = {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
+          console.log(localStorage)
           router.push("/");
         })
         .catch(
@@ -113,6 +103,17 @@ var UsersShowPage = {
   }
 };
 
+var PostNewPage = {
+  template: "#post-new-page",
+  data: function() {
+    return {
+    };
+  },
+  created: function() {},
+  methods: {},
+  computed: {}
+};
+
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
@@ -120,7 +121,8 @@ var router = new VueRouter({
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
-    { path: "/users/:id", component: UsersShowPage }
+    { path: "/users", component: UsersShowPage },
+    { path: "/posts", component: PostNewPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };

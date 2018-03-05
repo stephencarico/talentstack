@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
 end
 
-# --------------------------- RAILS ROUTES: ------------------------------- 
+# ================================================
+# ---------- RAILS ROUTES: -----------------------
+# ================================================ 
 # home_index GET    /home/index(.:format)                  home#index
 # post_comments GET    /posts/:post_id/comments(.:format)     comments#index
 #               POST   /posts/:post_id/comments(.:format)     comments#create
