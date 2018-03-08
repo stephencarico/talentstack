@@ -21,8 +21,28 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-    render json: @user.as_json
+    user = current_user
+    render json: user.as_json
+  end
+
+  def update
+    user = current_user
+    user.first_name = params[:first_name] || user.first_name
+    user.last_name = params[:last_name] || user.last_name
+    user.bio = params[:bio] || user.bio
+    user.profile_picture = params[:profile_picture] || user.profile_picture
+    user.save
+    if user.save
+      render json: {message: 'User updated successfully'}, status: :created
+    else
+      render json: {errors: user.errors.full_messages}, status: :bad_request
+    end
+  end
+
+  def destroy
+    user = current_user
+    user.destroy
+    render json: {message: "User successfully deleted"}
   end
 
 end

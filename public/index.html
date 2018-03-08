@@ -65,6 +65,11 @@
 </body>
 </html>
 
+<!--           -->
+<!-- TEMPLATES -->
+<!--           -->
+
+<!-- Home Page -->
 <template id="home-page">
   <div class="vue-component">
 
@@ -81,6 +86,7 @@
   </div>
 </template>
 
+<!-- Login Page -->
 <template id="login-page">
   <div class="vue-component">
 
@@ -104,6 +110,7 @@
   </div>
 </template>
 
+<!-- Signup Page -->
 <template id="signup-page">
   <div class="vue-component">
 
@@ -137,17 +144,48 @@
   </div>
 </template>
 
+<!-- Profile Page -->
 <template id="user-show-page">
   <div class="vue-component">
     
     <h2>{{ user.first_name }} {{ user.last_name }}</h2>
     <img :src="user.image" alt="">
     <p>{{ user.bio }}</p>
-    <p>{{ user.posts }}</p>
+    <a href="/#/users/edit" class="btn btn-secondary" >Edit Profile</button>
 
   </div>
 </template>
 
+<!-- Update User Page -->
+<template id="user-edit-page">
+  <div class="vue-component">
+
+    <h1>Edit Profile</h1>
+    <ul>
+      <li class="text-danger" v-for="error in errors">{{ error }}</li>
+    </ul>
+    <div class="form-group">
+      <label>First Name:</label> 
+      <input type="text" class="form-control" v-model="first_name">
+    </div>
+    <div class="form-group">
+      <label>Last Name:</label> 
+      <input type="text" class="form-control" v-model="last_name">
+    </div>
+    <div class="form-group">
+      <label>Bio:</label> 
+      <input type="text" class="form-control" v-model="bio">
+    </div>
+    <div class="form-group">
+      <label>Profile Picture:</label> 
+      <input type="text" class="form-control" v-model="profile_picture">
+    </div>
+    <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    <button class="btn btn-primary" v-on:click="deleteUser()">Delete Account</button>
+  </div>
+</template>
+
+<!-- Index Show Page -->
 <template id="posts-index-page">
   <div class="vue-component">
     <div class="row">
@@ -164,6 +202,7 @@
   </div>
 </template>
 
+<!-- Create New Post -->
 <template id="posts-new-page">
   <div class="vue-component">
 

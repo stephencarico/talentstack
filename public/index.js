@@ -103,6 +103,56 @@ var UsersShowPage = {
   }
 };
 
+var UsersEditPage = {
+  template: "#user-edit-page",
+  data: function() {
+    return {
+      first_name: "",
+      last_name: "",
+      bio: "",
+      profile_picture: "",
+      errors: []
+    };
+  },
+  created: function() {
+    axios.get("/users/" + this.$route.params.id).then(
+      function(response) {
+        this.first_name = response.data.first_name;
+        this.last_name = response.data.last_name;
+        this.bio = response.data.bio;
+        this.profile_picture = response.data.profile_picture;
+      }.bind(this)
+    );
+  },
+  methods: {
+    submit: function() {
+      var params = {
+        first_name: this.first_name,
+        last_name: this.last_name,
+        bio: this.bio,
+        profile_picture: this.profile_picture
+      };
+      axios
+        .patch("/users/:id", params)
+        .then(function(response) {
+          router.push("/users")
+        })
+        .catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
+    },
+    deleteUser: function() {
+      axios.delete("/users/:id").then(function(response) {
+        var index = this.users.indexOf(user);
+        this.users.splice(index, 1);
+      }.bind(this));
+      router.push("/login")
+    }
+  }
+};
+
 var PostsNewPage = {
   template: "#posts-new-page",
   data: function() {
@@ -158,6 +208,7 @@ var router = new VueRouter({
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
     { path: "/users", component: UsersShowPage },
+    { path: "/users/edit", component: UsersEditPage },
     { path: "/posts/new", component: PostsNewPage },
     { path: "/posts", component: PostsIndexPage }
   ],
