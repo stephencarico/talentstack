@@ -7,4 +7,12 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
 
+  def as_json
+    {
+      first_name: first_name,
+      last_name: last_name,
+      bio: bio,
+      posts: posts.map { |post| post }
+    }
+  end
 end
