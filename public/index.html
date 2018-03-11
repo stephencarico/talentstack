@@ -149,7 +149,7 @@
           <h3 class="card-title">{{ post.title }}</h3>
           <p class="card-text"> {{ post.body }}</p>
           <p class="card-text">Likes: {{ post.likes }}</p>
-          <a v-bind:href="'/#/posts/' + post.id" class="btn btn-secondary" >Expand</a>
+          <a v-bind:href="'/#/posts/' + post.id" class="btn btn-secondary" >View</a>
         </div>
       </div>
     </div>
@@ -197,6 +197,7 @@
             <h3 class="card-title">{{ post.title }}</h3>
             <p class="card-text"> {{ post.body }}</p>
             <p class="card-text">Likes: {{ post.likes }}</p>
+            <a v-bind:href="'/#/posts/' + post.id" class="btn btn-secondary" >View</a>
           </div>
         </div>
       </div>
@@ -253,6 +254,7 @@
       <input type="text" class="form-control" v-model="body">
     </div>
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    <a href="/#/posts" class="btn btn-secondary">Return</a>
     <button class="btn btn-secondary" v-on:click="deletePost()">Delete Post</button>
   </div>
 </template>
