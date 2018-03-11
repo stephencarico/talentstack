@@ -92,7 +92,8 @@ var UsersShowPage = {
   template: "#user-show-page",
   data: function() {
     return {
-      user: {}
+      user: {},
+      posts: []
     };
   },
   created: function() {
@@ -100,6 +101,11 @@ var UsersShowPage = {
       console.log(response.data);
       this.user = response.data;
     }.bind(this));
+    axios.get("/posts").then(function(response) {
+
+      this.posts = response.data
+      console.log(response.data)
+    }.bind(this))
   }
 };
 
