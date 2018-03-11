@@ -9,4 +9,35 @@ class PostsController < ApplicationController
     post = Post.find_by(id: params[:id])
     render json: post.as_json
   end
+
+  def create
+    post = Post.new(
+      user_id: current_user.id,
+      title: params[:title],
+      body: params[:body]
+      )
+    if post.save
+      render json: {message: 'Post created successfully'}, status: :created
+    else
+      render json: {errors: post.errors.full_messages}, status: :bad_request
+    end
+  end
+
+  def update
+    post = Post.find_by(id: params[:id])
+    post.title = params[:title] || post.title
+    post.body = params[:body] || post.body
+    post.save
+    if post.save
+      render json: {message: 'Post updated successfully'}, status: :created
+    else
+      render json: {errors: post.errors.full_messages}, status: :bad_request
+    end
+  end
+
+  def destroy
+    post = Post.find_by(id: params[:id])
+    post.destroy
+    render json: {message: "Post successfully deleted"}
+  end
 end
