@@ -233,12 +233,26 @@
     <h1>{{ post.title }}</h1>
     <p>{{ post.body }}</p>
     <p>Likes: {{ post.likes}}</p>
+    <a v-bind:href="'/#/posts/' + post.id + '/edit'" class="btn btn-primary">Edit</a>
   </div>
 </template>
 
 <!-- Edit Post Page -->
 <template id="posts-edit-page">
   <div class="vue-component">
-    
+    <ul>
+    <li class="text-danger" v-for="error in errors">{{ error }}</li>
+    </ul>
+
+    <div class="form-group">
+      <label>Title:</label> 
+      <input type="text" class="form-control" v-model="title">
+    </div>
+    <div class="form-group">
+      <label>Body:</label> 
+      <input type="text" class="form-control" v-model="body">
+    </div>
+    <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    <button class="btn btn-secondary" v-on:click="deletePost()">Delete Post</button>
   </div>
 </template>

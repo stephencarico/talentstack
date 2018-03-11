@@ -222,16 +222,42 @@ var PostsEditPage = {
   template: "#posts-edit-page",
   data: function() {
     return {
-      post: {}
+      title: "",
+      body: "",
+      errors: []
     };
   },
   created: function() {
-    axios.post("/posts/" + this.$route.params.id).then(function(response) {
-      console.log(response.data)
-      this.posts = response.data
+    axios.get("/posts/" + this.$route.params.id).then(function(response) {
+      this.title = response.data.title;
+      this.body = response.data.body;
     }.bind(this))
   },
-  methods: {}
+  methods: {
+    submit: function() {
+      var params = {
+        title: this.title,
+        body: this.body
+      };
+      axios
+        .patch("/posts/" + this.$route.params.id, params)
+        .then(function(response) {
+          router.push("/posts/:id")
+        })
+        .catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
+    },
+    deletePost: function() {
+      axios.delete("/posts/" + this.$route.params.id).then(function(response) {
+        var index = this.users.indexOf(user);
+        this.users.splice(index, 1);
+      }.bind(this));
+      router.push("/")
+    }
+  }
 };
 
 
