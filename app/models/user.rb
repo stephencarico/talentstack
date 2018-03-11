@@ -9,8 +9,7 @@ class User < ApplicationRecord
 
   def as_json
     {
-      first_name: first_name,
-      last_name: last_name,
+      full_name: first_name + " " + last_name,
       bio: bio,
       posts: posts.map { |post| post }
     }
