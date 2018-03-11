@@ -142,13 +142,14 @@
     
     <h2>{{ user.full_name }}</h2>
     <img :src="user.image" alt="">
-    <p>Bio: {{ user.bio }}</p>
+    <p>{{ user.bio }}</p>
     <div v-for="post in user.posts" class="col-md-4">
       <div class="card mb-2">
         <div class="card-body">
           <h3 class="card-title">{{ post.title }}</h3>
           <p class="card-text"> {{ post.body }}</p>
           <p class="card-text">Likes: {{ post.likes }}</p>
+          <a v-bind:href="'/#/posts/' + post.id" class="btn btn-secondary" >Expand</a>
         </div>
       </div>
     </div>
@@ -203,7 +204,7 @@
   </div>
 </template>
 
-<!-- Create New Post -->
+<!-- Create New Post Page -->
 <template id="posts-new-page">
   <div class="vue-component">
 
@@ -223,5 +224,21 @@
       <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     </div>
 
+  </div>
+</template>
+
+<!-- Show Post Page -->
+<template id="posts-show-page">
+  <div class="vue-component">
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.body }}</p>
+    <p>Likes: {{ post.likes}}</p>
+  </div>
+</template>
+
+<!-- Edit Post Page -->
+<template id="posts-edit-page">
+  <div class="vue-component">
+    
   </div>
 </template>

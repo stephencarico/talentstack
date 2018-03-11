@@ -92,7 +92,8 @@ var UsersShowPage = {
   template: "#user-show-page",
   data: function() {
     return {
-      user: {}
+      user: {},
+      currentPost: {}
     };
   },
   created: function() {
@@ -100,7 +101,8 @@ var UsersShowPage = {
       console.log(response.data);
       this.user = response.data;
     }.bind(this));
-  }
+  },
+  methods: {}
 };
 
 var UsersEditPage = {
@@ -200,6 +202,38 @@ var PostsIndexPage = {
   computed: {}
 };
 
+var PostsShowPage = {
+  template: "#posts-show-page",
+  data: function() {
+    return {
+      post: {}
+    };
+  },
+  created: function() {
+    axios.get("/posts/" + this.$route.params.id).then(function(response) {
+      console.log(response.data)
+      this.post = response.data
+    }.bind(this))
+  },
+  methods: {}
+};
+
+var PostsEditPage = {
+  template: "#posts-edit-page",
+  data: function() {
+    return {
+      post: {}
+    };
+  },
+  created: function() {
+    axios.post("/posts/" + this.$route.params.id).then(function(response) {
+      console.log(response.data)
+      this.posts = response.data
+    }.bind(this))
+  },
+  methods: {}
+};
+
 
 var router = new VueRouter({
   routes: [
@@ -209,8 +243,10 @@ var router = new VueRouter({
     { path: "/logout", component: LogoutPage },
     { path: "/users", component: UsersShowPage },
     { path: "/users/edit", component: UsersEditPage },
+    { path: "/posts", component: PostsIndexPage },
     { path: "/posts/new", component: PostsNewPage },
-    { path: "/posts", component: PostsIndexPage }
+    { path: "/posts/:id", component: PostsShowPage },
+    { path: "/posts/:id/edit", component: PostsEditPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
