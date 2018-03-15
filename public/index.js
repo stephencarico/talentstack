@@ -11,6 +11,7 @@ var HomePage = {
   computed: {}
 };
 
+// Account actions
 var SignupPage = {
   template: "#signup-page",
   data: function() {
@@ -88,6 +89,7 @@ var LogoutPage = {
   }
 };
 
+// User actions
 var UsersShowPage = {
   template: "#user-show-page",
   data: function() {
@@ -98,6 +100,7 @@ var UsersShowPage = {
   },
   created: function() {
     axios.get("/users/" + this.$route.params.id).then(function(response) {
+      console.log(localStorage.jwt)
       console.log(response.data);
       this.user = response.data;
     }.bind(this));
@@ -155,6 +158,7 @@ var UsersEditPage = {
   }
 };
 
+// Post actions
 var PostsNewPage = {
   template: "#posts-new-page",
   data: function() {
@@ -222,15 +226,13 @@ var PostsEditPage = {
   template: "#posts-edit-page",
   data: function() {
     return {
-      title: "",
-      body: "",
+      post: {},
       errors: []
     };
   },
   created: function() {
     axios.get("/posts/" + this.$route.params.id).then(function(response) {
-      this.title = response.data.title;
-      this.body = response.data.body;
+      this.post = response.data;
     }.bind(this))
   },
   methods: {
@@ -250,6 +252,10 @@ var PostsEditPage = {
           }.bind(this)
         );
     },
+    setCurrentPost: function(post) {
+      this.currentPost = post;
+      console.log(this.currentPost);
+    },
     deletePost: function() {
       axios.delete("/posts/" + this.$route.params.id).then(function(response) {
         var index = this.users.indexOf(user);
@@ -260,7 +266,7 @@ var PostsEditPage = {
   }
 };
 
-
+// Framework
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
