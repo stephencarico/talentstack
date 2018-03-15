@@ -67,8 +67,9 @@ var LoginPage = {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
+          localStorage.setItem("user_id", response.data.user_id);
           console.log(localStorage)
-          router.push("/");
+          router.push("/users");
         })
         .catch(
           function(error) {
@@ -94,13 +95,11 @@ var UsersShowPage = {
   template: "#user-show-page",
   data: function() {
     return {
-      user: {},
-      currentPost: {}
+      user: {}
     };
   },
   created: function() {
     axios.get("/users/" + this.$route.params.id).then(function(response) {
-      console.log(localStorage.jwt)
       console.log(response.data);
       this.user = response.data;
     }.bind(this));
@@ -138,7 +137,7 @@ var UsersEditPage = {
         profile_picture: this.profile_picture
       };
       axios
-        .patch("/users/:id", params)
+        .patch("/users/" + this.$route.params.id, params)
         .then(function(response) {
           router.push("/users")
         })
@@ -210,14 +209,16 @@ var PostsShowPage = {
   template: "#posts-show-page",
   data: function() {
     return {
-      post: {}
+      post: {},
+      user_id: ""
     };
   },
   created: function() {
     axios.get("/posts/" + this.$route.params.id).then(function(response) {
       console.log(response.data)
       this.post = response.data
-    }.bind(this))
+    }.bind(this));
+    this.user_id = localStorage.user_id
   },
   methods: {}
 };
@@ -238,23 +239,19 @@ var PostsEditPage = {
   methods: {
     submit: function() {
       var params = {
-        title: this.title,
-        body: this.body
+        title: this.post.title,
+        body: this.post.body
       };
       axios
         .patch("/posts/" + this.$route.params.id, params)
         .then(function(response) {
-          router.push("/posts/:id")
+          router.push("/posts")
         })
         .catch(
           function(error) {
             this.errors = error.response.data.errors;
           }.bind(this)
         );
-    },
-    setCurrentPost: function(post) {
-      this.currentPost = post;
-      console.log(this.currentPost);
     },
     deletePost: function() {
       axios.delete("/posts/" + this.$route.params.id).then(function(response) {

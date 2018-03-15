@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  before_action :authenticate_user, except: [:index, :show]
+
   def index 
     posts = Post.all
     render json: posts.as_json
@@ -27,7 +29,6 @@ class PostsController < ApplicationController
     post = Post.find_by(id: params[:id])
     post.title = params[:title] || post.title
     post.body = params[:body] || post.body
-    post.save
     if post.save
       render json: {message: 'Post updated successfully'}, status: :created
     else
