@@ -16,7 +16,9 @@ class PostsController < ApplicationController
     post = Post.new(
       user_id: current_user.id,
       title: params[:title],
-      body: params[:body]
+      pitch: params[:pitch],
+      body: params[:body],
+      seeking: params[:seeking]
       )
     if post.save
       render json: {message: 'Post created successfully'}, status: :created
@@ -28,7 +30,9 @@ class PostsController < ApplicationController
   def update
     post = Post.find_by(id: params[:id])
     post.title = params[:title] || post.title
+    post.pitch = params[:pitch] || post.pitch
     post.body = params[:body] || post.body
+    post.seeking = params[:seeking] || post.seeking
     if post.save
       render json: {message: 'Post updated successfully'}, status: :created
     else

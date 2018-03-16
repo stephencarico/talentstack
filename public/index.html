@@ -69,7 +69,6 @@
 <!-- // TEMPLATES // -->
 <!-- //////////////  -->
 
-<!-- ACCOUNT -->
 <!-- Home Page -->
 <template id="home-page">
   <div class="vue-component">
@@ -79,6 +78,7 @@
   </div>
 </template>
 
+<!-- ACCOUNT -->
 <!-- Login Page -->
 <template id="login-page">
   <div class="vue-component">
@@ -102,7 +102,6 @@
 
   </div>
 </template>
-
 <!-- Signup Page -->
 <template id="signup-page">
   <div class="vue-component">
@@ -157,9 +156,9 @@
     </div>
     <br>
     <a href="/#/users/edit" class="btn btn-secondary" >Edit Profile</a>
+    <a class="btn btn-secondary" href="/#/posts/new" >Create Post</a>
   </div>
 </template>
-
 <!-- Update User Page -->
 <template id="user-edit-page">
   <div class="vue-component">
@@ -190,7 +189,7 @@
 </template>
 
 <!-- POSTS -->
-<!-- Index Show Page -->
+<!-- Index All Posts -->
 <template id="posts-index-page">
   <div class="vue-component">
     <div class="row">
@@ -198,7 +197,7 @@
         <div class="card mb-2">
           <div class="card-body">
             <h3 class="card-title">{{ post.title }}</h3>
-            <p class="card-text">{{ post.body }}</p>
+            <p class="card-text">{{ post.pitch }}</p>
             <p class="card-text">Likes: {{ post.likes }}</p>
             <a v-bind:href="'/#/posts/' + post.id" class="btn btn-secondary" >View</a>
           </div>
@@ -207,7 +206,6 @@
     </div>
   </div>
 </template>
-
 <!-- Create New Post Page -->
 <template id="posts-new-page">
   <div class="vue-component">
@@ -222,25 +220,37 @@
         <input type="text" class="form-control" v-model="title">
       </div>
       <div class="form-group">
-        <label>Body:</label>
+        <label>Pitch:</label>
+        <input type="text" class="form-control" v-model="pitch">
+      </div>
+      <p>The below information will be protected by a signed agreement form. This is where any information you feel is pertinent to your idea should be placed.</p>
+      <div class="form-group">
+        <label>Overview:</label>
         <input type="text" class="form-control" v-model="body">
+      </div>
+      <div class="form-group">
+        <label>I'm Seeking:</label>
+        <input type="text" class="form-control" v-model="seeking">
       </div>
       <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     </div>
 
   </div>
 </template>
-
 <!-- Show Post Page -->
 <template id="posts-show-page">
   <div class="vue-component">
     <h1>{{ post.title }}</h1>
+    <p>{{ post.pitch }}</p>
+    <p>----------------------</p>
+    <h4>Overview:</h4>
     <p>{{ post.body }}</p>
-    <p>Likes: {{ post.likes}}</p>
+    <h4>I'm Seeking</h4>
+    <p>{{ post.seeking }}</p>
+    <p><b>Likes: {{ post.likes}}</b></p>
     <a v-if="post.user_id == user_id" v-bind:href="'/#/posts/' + post.id + '/edit'" class="btn btn-primary">Edit</a>
   </div>
 </template>
-
 <!-- Edit Post Page -->
 <template id="posts-edit-page">
   <div class="vue-component">
@@ -253,8 +263,17 @@
       <input type="text" class="form-control" v-model="post.title">
     </div>
     <div class="form-group">
-      <label>Body:</label> 
+      <label>Pitch:</label>
+      <input type="text" class="form-control" v-model="post.pitch">
+    </div>
+    <p>The below information will be protected by a signed agreement form. This is where any information you feel is pertinent to your idea should be placed.</p>
+    <div class="form-group">
+      <label>Overview:</label>
       <input type="text" class="form-control" v-model="post.body">
+    </div>
+    <div class="form-group">
+      <label>I'm Seeking:</label>
+      <input type="text" class="form-control" v-model="post.seeking">
     </div>
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     <a v-bind:href="'/#/posts/'+ post.id" class="btn btn-secondary">Return</a>

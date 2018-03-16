@@ -11,7 +11,7 @@ var HomePage = {
   computed: {}
 };
 
-// Account actions
+// ACCOUNTS
 var SignupPage = {
   template: "#signup-page",
   data: function() {
@@ -46,7 +46,6 @@ var SignupPage = {
     }
   }
 };
-
 var LoginPage = {
   template: "#login-page",
   data: function() {
@@ -81,7 +80,6 @@ var LoginPage = {
     }
   }
 };
-
 var LogoutPage = {
   created: function() {
     axios.defaults.headers.common["Authorization"] = undefined;
@@ -90,7 +88,7 @@ var LogoutPage = {
   }
 };
 
-// User actions
+// USERS
 var UsersShowPage = {
   template: "#user-show-page",
   data: function() {
@@ -106,7 +104,6 @@ var UsersShowPage = {
   },
   methods: {}
 };
-
 var UsersEditPage = {
   template: "#user-edit-page",
   data: function() {
@@ -157,13 +154,15 @@ var UsersEditPage = {
   }
 };
 
-// Post actions
+// POSTS
 var PostsNewPage = {
   template: "#posts-new-page",
   data: function() {
     return {
       title: "",
+      pitch: "",
       body: "",
+      seeking: "",
       errors: []
     };
   },
@@ -171,7 +170,9 @@ var PostsNewPage = {
     submit: function() {
       var params = {
         title: this.title,
-        body: this.body
+        pitch: this.pitch,
+        body: this.body,
+        seeking: this.seeking
       };
       axios
         .post("/posts", params)
@@ -186,7 +187,6 @@ var PostsNewPage = {
   },
   computed: {}
 };
-
 var PostsIndexPage = {
   template: "#posts-index-page",
   data: function() {
@@ -204,7 +204,6 @@ var PostsIndexPage = {
   methods: {},
   computed: {}
 };
-
 var PostsShowPage = {
   template: "#posts-show-page",
   data: function() {
@@ -222,7 +221,6 @@ var PostsShowPage = {
   },
   methods: {}
 };
-
 var PostsEditPage = {
   template: "#posts-edit-page",
   data: function() {
@@ -240,7 +238,9 @@ var PostsEditPage = {
     submit: function() {
       var params = {
         title: this.post.title,
-        body: this.post.body
+        pitch: this.post.pitch,
+        body: this.post.body,
+        seeking: this.post.seeking
       };
       axios
         .patch("/posts/" + this.$route.params.id, params)
