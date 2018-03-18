@@ -246,12 +246,11 @@
         <input type="text" class="form-control" v-model="seeking">
       </div>
       <div class="form-group">
-        <label>Tag ID:</label>
+        <label>Tags:</label>
         <div v-for="tag in tags">
           <input type="checkbox" v-model="tag_ids" :id="tag.title" :value="tag.id"> {{tag.title}}<br>
         </div>
       </div>
-      <span>Checked tags: {{ tag_ids }}</span>
       <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     </div>
 
@@ -294,6 +293,12 @@
     <div class="form-group">
       <label>I'm Seeking:</label>
       <input type="text" class="form-control" v-model="post.seeking">
+    </div>
+    <div class="form-group">
+      <label>Tags:</label>
+      <div v-for="tag in tags">
+        <input type="checkbox" v-model="tag_ids" :id="tag.title" :value="tag.id"> {{tag.title}}<br>
+      </div>
     </div>
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     <a v-bind:href="'/#/posts/'+ post.id" class="btn btn-secondary">Return</a>

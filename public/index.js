@@ -216,7 +216,6 @@ var PostsNewPage = {
           function(error) {
             this.errors = error.response.data.errors;
           }.bind(this))
-
     }
   },
   computed: {}
@@ -264,6 +263,8 @@ var PostsEditPage = {
   data: function() {
     return {
       post: {},
+      tag_ids: [],
+      tags: [],
       errors: []
     };
   },
@@ -271,6 +272,10 @@ var PostsEditPage = {
     axios.get("/posts/" + this.$route.params.id).then(function(response) {
       this.post = response.data;
     }.bind(this))
+    axios.get("/tags/").then(function(response) {
+      console.log(response.data)
+      this.tags = response.data
+    }.bind(this));
   },
   methods: {
     submit: function() {
@@ -278,7 +283,8 @@ var PostsEditPage = {
         title: this.post.title,
         pitch: this.post.pitch,
         body: this.post.body,
-        seeking: this.post.seeking
+        seeking: this.post.seeking,
+
       };
       axios
         .patch("/posts/" + this.$route.params.id, params)
@@ -322,5 +328,11 @@ var router = new VueRouter({
 
 var app = new Vue({
   el: "#vue-app",
-  router: router
+  router: router,
+  created: function() {
+    var jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      axios.defaults.headers.common["Authorization"] = jwt;
+    }
+  }
 });
