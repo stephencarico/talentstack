@@ -248,9 +248,10 @@
       <div class="form-group">
         <label>Tag ID:</label>
         <div v-for="tag in tags">
-          <input type="radio" v-model="tag_id" :value="tag.id"> {{tag.title}}<br>
+          <input type="checkbox" v-model="tag_ids" :id="tag.title" :value="tag.id"> {{tag.title}}<br>
         </div>
       </div>
+      <span>Checked tags: {{ tag_ids }}</span>
       <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     </div>
 

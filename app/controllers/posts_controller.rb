@@ -21,10 +21,12 @@ class PostsController < ApplicationController
       seeking: params[:seeking]
       )
     if post.save
-      post_tag = PostTag.create(
-        post_id: post.id,
-        tag_id: params[:tag_id]
-      )
+      params[:tag_ids].each do |tag_id|
+        post_tag = PostTag.create(
+          post_id: post.id,
+          tag_id: tag_id
+        )
+      end
       render json: {message: 'Post created successfully'}, status: :created
     else
       render json: {errors: post.errors.full_messages}, status: :bad_request

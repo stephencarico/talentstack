@@ -180,7 +180,7 @@ var PostsNewPage = {
       pitch: "",
       body: "",
       seeking: "",
-      tag_id: "",
+      tag_ids: [],
       tags: [],
       errors: []
     };
@@ -198,7 +198,7 @@ var PostsNewPage = {
         pitch: this.pitch,
         body: this.body,
         seeking: this.seeking,
-        tag_id: this.tag_id
+        tag_ids: this.tag_ids
       };
       axios
         .post("/posts", params)
