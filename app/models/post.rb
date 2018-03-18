@@ -8,5 +8,5 @@ class Post < ApplicationRecord
   validates :title, presence: true, uniqueness: true, length: {in: 1..50}
   validates :pitch, presence: true, length: {in: 10..250}
   validates :body, presence: true
-  validates :seking, presence :true
+  validates :seeking, presence: :true
 end

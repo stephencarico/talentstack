@@ -180,8 +180,16 @@ var PostsNewPage = {
       pitch: "",
       body: "",
       seeking: "",
+      tag_id: "",
+      tags: [],
       errors: []
     };
+  },
+  created: function() {
+    axios.get("/tags/").then(function(response) {
+      console.log(response.data)
+      this.tags = response.data
+    }.bind(this));
   },
   methods: {
     submit: function() {
@@ -189,7 +197,8 @@ var PostsNewPage = {
         title: this.title,
         pitch: this.pitch,
         body: this.body,
-        seeking: this.seeking
+        seeking: this.seeking,
+        tag_id: this.tag_id
       };
       axios
         .post("/posts", params)
@@ -200,6 +209,7 @@ var PostsNewPage = {
           function(error) {
             this.errors = error.response.data.errors;
           }.bind(this))
+
     }
   },
   computed: {}
