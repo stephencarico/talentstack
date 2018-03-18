@@ -21,7 +21,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = current_user
+    if params[:id] == "me"
+      user = current_user
+    else
+      user = User.find_by(id: params[:id])
+    end
+
     render json: user.as_json
   end
 

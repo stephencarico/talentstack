@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_action :authenticate_user, except: [:index]
+  before_action :authenticate_user, except: [:index, :show]
 
   def index 
     posts = Post.all.order(id: :asc)
@@ -48,6 +48,7 @@ class PostsController < ApplicationController
 
   def destroy
     post = Post.find_by(id: params[:id])
+    PostTag.where(post_id: post.id).destroy_all
     post.destroy
     render json: {message: "Post successfully deleted"}
   end

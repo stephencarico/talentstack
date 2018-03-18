@@ -37,6 +37,7 @@ var SignupPage = {
       last_name: "",
       email: "",
       password: "",
+      password_confirmation: "",
       errors: []
     };
   },
@@ -48,7 +49,7 @@ var SignupPage = {
         last_name: this.last_name,
         email: this.email,
         password: this.password,
-        password_confirmation: this.passwordConfirmation
+        password_confirmation: this.password_confirmation
       };
       axios
         .post("/users", params)
@@ -80,12 +81,14 @@ var LoginPage = {
       axios
         .post("/user_token", params)
         .then(function(response) {
+          console.log(response.data.jwt)
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
-          localStorage.setItem("user_id", response.data.user_id);
+          axios.get("/users/me").then(function(response) { localStorage.setItem("user_id", response.data.id);
+          }.bind(this));
           console.log(localStorage)
-          router.push("/users");
+          router.push("/profile");
         })
         .catch(
           function(error) {
@@ -114,7 +117,11 @@ var UsersShowPage = {
     };
   },
   created: function() {
-    axios.get("/users/" + this.$route.params.id).then(function(response) {
+    // axios.get("/users/" + localStorage.user_id).then(function(response) {
+    //   console.log(response.data);
+    //   this.user = response.data;
+    // }.bind(this));
+    axios.get("/users/me").then(function(response) {
       console.log(response.data);
       this.user = response.data;
     }.bind(this));
@@ -236,7 +243,7 @@ var PostsShowPage = {
   data: function() {
     return {
       post: {},
-      user_id: ""
+      user: {}
     };
   },
   created: function() {
@@ -244,7 +251,11 @@ var PostsShowPage = {
       console.log(response.data)
       this.post = response.data
     }.bind(this));
-    this.user_id = localStorage.user_id
+    // this.user_id = localStorage.user_id
+    axios.get("/users/me").then(function(response) {
+      console.log(response.data);
+      this.user = response.data;
+    }.bind(this));
   },
   methods: {}
 };
@@ -297,7 +308,7 @@ var router = new VueRouter({
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
-    { path: "/users", component: UsersShowPage },
+    { path: "/profile", component: UsersShowPage },
     { path: "/users/edit", component: UsersEditPage },
     { path: "/posts", component: PostsIndexPage },
     { path: "/posts/new", component: PostsNewPage },
