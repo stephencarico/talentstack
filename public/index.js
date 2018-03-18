@@ -5,7 +5,7 @@ var HomePage = {
   data: function() {
     return {
       tags: {},
-      currentTag: {},
+      // currentTag: {},
       posts: []
     };
   },
@@ -20,10 +20,10 @@ var HomePage = {
     }.bind(this));
   },
   methods: {
-    setCurrentTag: function(tag) {
-      this.currentTag = tag;
-      console.log(this.currentTag)
-    }
+    // setCurrentTag: function(tag) {
+    //   this.currentTag = tag;
+    //   console.log(this.currentTag)
+    // }
   },
   computed: {}
 };
@@ -117,10 +117,6 @@ var UsersShowPage = {
     };
   },
   created: function() {
-    // axios.get("/users/" + localStorage.user_id).then(function(response) {
-    //   console.log(response.data);
-    //   this.user = response.data;
-    // }.bind(this));
     axios.get("/users/me").then(function(response) {
       console.log(response.data);
       this.user = response.data;
@@ -307,6 +303,35 @@ var PostsEditPage = {
   }
 };
 
+// TAGS
+var TagsShowPage = {
+  template: "#tags-show-page",
+  data: function() {
+    return {
+      tags: [],
+      tag: {}
+    };
+  },
+  created: function() {
+    axios.get("/tags/").then(function(response) {
+      console.log(response.data)
+      this.tags = response.data
+    }.bind(this));
+    axios.get("/tags/" + this.$route.params.id).then(function(response) {
+      console.log(response.data)
+      this.tag = response.data
+    }.bind(this));
+  },
+  methods: {
+    route: function(new_tag) {
+      axios.get("/tags/" + new_tag.id).then(function(response) {
+        console.log(response.data)
+        this.tag = response.data
+      }.bind(this));
+    }
+  }
+};
+
 // Framework
 var router = new VueRouter({
   routes: [
@@ -319,7 +344,8 @@ var router = new VueRouter({
     { path: "/posts", component: PostsIndexPage },
     { path: "/posts/new", component: PostsNewPage },
     { path: "/posts/:id", component: PostsShowPage },
-    { path: "/posts/:id/edit", component: PostsEditPage }
+    { path: "/posts/:id/edit", component: PostsEditPage },
+    { path: "/tags/:id", component: TagsShowPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };

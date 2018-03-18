@@ -73,11 +73,12 @@
 <template id="home-page">
   <div class="vue-component">
     <div class="row">
-      <a type="button" class="btn btn-primary">All</a>
+      <a class="btn btn-primary" href="/">All</a>
+      <br>
       <div v-for="tag in tags">
-        <a type="button" v-on:click="setCurrentTag(tag)" class="btn btn-secondary">{{ tag.title }}</a>
+        <a v-bind:href="'/#/tags/' + tag.id" class="btn btn-primary">{{ tag.title }}</a>
+        <br>
       </div>
-      <h1>{{currentTag.title}}</h1>
     </div>
     <div class="row">
       <div v-for="post in posts" class="col-md-4">
@@ -306,5 +307,24 @@
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     <a v-bind:href="'/#/posts/'+ post.id" class="btn btn-secondary">Return</a>
     <button class="btn btn-secondary" v-on:click="deletePost()">Delete Post</button>
+  </div>
+</template>
+
+<!-- TAGS -->
+<!-- Show Post Page -->
+<template id="tags-show-page">
+  <div class="vue-component">
+    <div class="row">
+      <a class="btn btn-primary" href="/">All</a>
+      <br>
+      <div v-for="tag in tags">
+        <a class="btn btn-primary" v-on:click="route(tag)">{{ tag.title }}</a>
+        <br>
+      </div>
+    </div>
+    <h1>{{tag.title}}</h1>
+    <div>
+      
+    </div>
   </div>
 </template>
