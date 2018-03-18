@@ -4,10 +4,27 @@ var HomePage = {
   template: "#home-page",
   data: function() {
     return {
+      tags: {},
+      currentTag: {},
+      posts: []
     };
   },
-  created: function() {},
-  methods: {},
+  created: function() {
+    axios.get("/tags/").then(function(response) {
+      console.log(response.data)
+      this.tags = response.data
+    }.bind(this));
+    axios.get("/posts/").then(function(response) {
+      console.log(response.data)
+      this.posts = response.data
+    }.bind(this));
+  },
+  methods: {
+    setCurrentTag: function(tag) {
+      this.currentTag = tag;
+      console.log(this.currentTag)
+    }
+  },
   computed: {}
 };
 

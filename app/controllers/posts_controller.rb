@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
 
-  before_action :authenticate_user, except: [:index, :show]
+  before_action :authenticate_user, except: [:index]
 
   def index 
-    posts = Post.all
+    posts = Post.all.order(id: :asc)
     render json: posts.as_json
   end
 
