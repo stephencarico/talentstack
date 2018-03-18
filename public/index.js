@@ -140,7 +140,7 @@ var UsersEditPage = {
     };
   },
   created: function() {
-    axios.get("/users/" + this.$route.params.id).then(
+    axios.get("/users/me").then(
       function(response) {
         this.first_name = response.data.first_name;
         this.last_name = response.data.last_name;
@@ -160,7 +160,7 @@ var UsersEditPage = {
       axios
         .patch("/users/" + this.$route.params.id, params)
         .then(function(response) {
-          router.push("/users")
+          router.push("/profile")
         })
         .catch(
           function(error) {
@@ -309,7 +309,7 @@ var router = new VueRouter({
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
     { path: "/profile", component: UsersShowPage },
-    { path: "/users/edit", component: UsersEditPage },
+    { path: "/profile/edit", component: UsersEditPage },
     { path: "/posts", component: PostsIndexPage },
     { path: "/posts/new", component: PostsNewPage },
     { path: "/posts/:id", component: PostsShowPage },
