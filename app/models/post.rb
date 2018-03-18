@@ -9,4 +9,16 @@ class Post < ApplicationRecord
   validates :pitch, presence: true, length: {in: 10..250}
   validates :body, presence: true
   validates :seeking, presence: :true
+
+  def as_json
+    {
+      id: id,
+      user_id: user_id,
+      title: title,
+      pitch: pitch,
+      body: body,
+      seeking: seeking,
+      tags: tags.as_json
+    }
+  end
 end

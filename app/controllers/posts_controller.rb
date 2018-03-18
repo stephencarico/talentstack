@@ -39,7 +39,15 @@ class PostsController < ApplicationController
     post.pitch = params[:pitch] || post.pitch
     post.body = params[:body] || post.body
     post.seeking = params[:seeking] || post.seeking
+
     if post.save
+      PostTag.where(post_id: post.id).destroy_all
+      params[:tag_ids].each do |tag_id|
+        post_tag = PostTag.create(
+          post_id: post.id,
+          tag_id: tag_id
+        )
+      end
       render json: {message: 'Post updated successfully'}, status: :created
     else
       render json: {errors: post.errors.full_messages}, status: :bad_request

@@ -284,12 +284,12 @@ var PostsEditPage = {
         pitch: this.post.pitch,
         body: this.post.body,
         seeking: this.post.seeking,
-
+        tag_ids: this.tag_ids
       };
       axios
         .patch("/posts/" + this.$route.params.id, params)
         .then(function(response) {
-          router.push("/posts")
+          router.push("/profile")
         })
         .catch(
           function(error) {

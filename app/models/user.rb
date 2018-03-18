@@ -14,7 +14,7 @@ class User < ApplicationRecord
       last_name: last_name,
       full_name: first_name + " " + last_name,
       bio: bio,
-      posts: posts.map { |post| post }
+      posts: posts.as_json
     }
   end
 end
