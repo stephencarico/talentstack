@@ -23,21 +23,23 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/#/profile/">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/#/posts/new" >Create Post</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/#/profile/" v-if="isLoggedIn()">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/#/posts/new" v-if="isLoggedIn()">Create Post</a>
+            </li>
           <li class="nav-item">
             <a class="nav-link" href="/#/posts" >View Posts</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/#/signup">Signup</a>
-              <a class="dropdown-item" href="/#/login">Login</a>
-              <a class="dropdown-item" href="/#/logout">Logout</a>
+              <div v-if="!isLoggedIn()">
+                <a class="dropdown-item" href="/#/signup">Signup</a>
+                <a class="dropdown-item" href="/#/login">Login</a>
+              </div>
+              <a class="dropdown-item" href="/#/logout" v-if="isLoggedIn()">Logout</a>
             </div>
           </li>
         </ul>

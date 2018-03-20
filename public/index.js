@@ -361,5 +361,14 @@ var app = new Vue({
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
     }
+  },
+  methods: {
+    isLoggedIn: function() {
+      if (localStorage.getItem("jwt")) {
+        return true
+      } else {
+        return false
+      }
+    }
   }
 });
