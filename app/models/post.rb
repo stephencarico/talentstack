@@ -10,6 +10,14 @@ class Post < ApplicationRecord
   validates :body, presence: true
   validates :seeking, presence: :true
 
+  def simple_tags
+    simple_tags = []
+    tags.each do |tag|
+      simple_tags << {id: tag.id, title: tag.title}
+    end
+    return simple_tags
+  end
+
   def as_json
     {
       id: id,
@@ -18,7 +26,8 @@ class Post < ApplicationRecord
       pitch: pitch,
       body: body,
       seeking: seeking,
-      tags: tags.as_json
+      # tags: tags.as_json
+      tags: simple_tags
     }
   end
 end

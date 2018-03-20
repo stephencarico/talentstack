@@ -324,6 +324,7 @@ var TagsShowPage = {
   },
   methods: {
     route: function(new_tag) {
+      // router.push("/tags/" + new_tag.id)
       axios.get("/tags/" + new_tag.id).then(function(response) {
         console.log(response.data)
         this.tag = response.data
