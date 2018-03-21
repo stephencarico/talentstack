@@ -230,7 +230,15 @@ var PostsIndexPage = {
       console.log(response.data)
     }.bind(this))
   },
-  methods: {},
+  methods: {
+    isLoggedIn: function() {
+      if (localStorage.getItem("jwt")) {
+        return true
+      } else {
+        return false
+      }
+    }
+  },
   computed: {}
 };
 var PostsShowPage = {
