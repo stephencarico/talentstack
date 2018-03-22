@@ -88,7 +88,7 @@ var LoginPage = {
           axios.get("/users/me").then(function(response) { localStorage.setItem("user_id", response.data.id);
           }.bind(this));
           console.log(localStorage)
-          router.push("/profile");
+          router.push("/");
         })
         .catch(
           function(error) {
