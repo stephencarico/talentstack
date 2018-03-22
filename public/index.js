@@ -317,7 +317,8 @@ var TagsShowPage = {
   data: function() {
     return {
       tags: [],
-      tag: {}
+      tag: {},
+      currentPost: {}
     };
   },
   created: function() {
@@ -337,6 +338,21 @@ var TagsShowPage = {
         console.log(response.data)
         this.tag = response.data
       }.bind(this));
+    },
+    isLoggedIn: function() {
+      if (localStorage.getItem("jwt")) {
+        return true
+      } else {
+        return false
+      }
+    },
+    setCurrentPost: function(post) {
+      this.currentPost = post;
+      console.log(this.currentPost);
+    },
+    goToPost: function(post) {
+      $('#exampleModal').modal('hide');
+      router.push("/posts/" + post.id);
     }
   }
 };

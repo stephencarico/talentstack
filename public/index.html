@@ -219,60 +219,6 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <!-- If Logged In -->
-      <div v-if="isLoggedIn()">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Disclosure Agreement Form</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Lorem ipsum dolor sit amet, fugit partem posidonium pro an. Tincidunt democritum ius ne, autem everti contentiones duo ne, ut legimus lucilius posidonium pri. Eu sea prompta euismod. An eos commodo maluisset mnesarchum.
-
-              Prompta nusquam eu has, sea ut errem soleat appareat, ex iudicabit adolescens scripserit mel. Ea pro vivendo suscipit appellantur. Est oblique temporibus cu, an sea malorum electram cotidieque. Usu quaestio posidonium ad, ei dicam fabellas postulant mel. Nec no stet saepe, hinc ipsum et his, dicam denique eam an. Quem erat adipiscing nec te, in vix agam aeque.
-              </p>
-            </div>
-            <div class="modal-footer">
-              <!-- This button will send the author -->
-              <!-- A notification that userA has viewed this.post -->
-              <!-- ROUTING: Needs SetCurrentPost() -->
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Agree</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- If not Logged In -->
-      <div v-if="!isLoggedIn()">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Before Viewing:</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Log In</p>
-
-            </div>
-            <div class="modal-body">
-              <p>Sign Up!</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </template>
 
@@ -394,7 +340,59 @@
           </div>
           <p class="card-text">{{ post.pitch }}</p>
           <!-- <p class="card-text">Likes: {{ post.likes }}</p> -->
-          <a v-bind:href="'/#/posts/' + post.id" class="btn btn-secondary" >View</a>
+          <!-- <a v-bind:href="'/#/posts/' + post.id" class="btn btn-secondary" >View</a> -->
+          <a v-on:click="setCurrentPost(post)" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">View</a>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <!-- If Logged In -->
+      <div v-if="isLoggedIn()">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Non-Disclosure Agreement Form</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>To maintain your business's competitive advantage, use a Non-Disclosure Agreement (NDA) to protect your proprietary information. Having an NDA form helps protect your intellectual property, like your trade secrets, from getting into the wrong hands. Get it in writing before sharing any confidential information, so both parties understand their duties and privileges.
+              </p>
+            </div>
+            <div class="modal-footer">
+              <!-- This button will send the author -->
+              <!-- A notification that userA has viewed this.post -->
+              <!-- <a v-bind:href="'/#/posts/' + currentPost.id" class="btn btn-primary" >Agree</a> -->
+              <a v-on:click="goToPost(currentPost)" class="btn btn-primary" >Agree</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- If not Logged In -->
+      <div v-if="!isLoggedIn()">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Before Viewing:</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Log In</p>
+
+            </div>
+            <div class="modal-body">
+              <p>Sign Up!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
