@@ -1,12 +1,16 @@
 /* global Vue, VueRouter, axios */
 
+// MAIN WEBSITE
 var HomePage = {
   template: "#home-page",
   data: function() {
     return {
       tags: {},
-      // currentTag: {},
-      posts: []
+      posts: [],
+      currentPost: {},
+      email: "",
+      password: "",
+      errors: []
     };
   },
   created: function() {
@@ -20,12 +24,118 @@ var HomePage = {
     }.bind(this));
   },
   methods: {
-    // setCurrentTag: function(tag) {
-    //   this.currentTag = tag;
-    //   console.log(this.currentTag)
-    // }
+    isLoggedIn: function() {
+      if (localStorage.getItem("jwt")) {
+        return true
+      } else {
+        return false
+      }
+    },
+    setCurrentPost: function(post) {
+      this.currentPost = post;
+      console.log(this.currentPost);
+    },
+    hideModal: function() {
+      $('#exampleModal').modal('hide');
+    },
+    submit: function() {
+      var params = {
+        auth: { email: this.email, password: this.password }
+      };
+      axios
+        .post("/user_token", params)
+        .then(function(response) {
+          console.log(response.data.jwt)
+          axios.defaults.headers.common["Authorization"] =
+            "Bearer " + response.data.jwt;
+          localStorage.setItem("jwt", response.data.jwt);
+          axios.get("/users/me").then(function(response) { localStorage.setItem("user_id", response.data.id);
+          }.bind(this));
+          console.log(localStorage)
+          $('#exampleModal').modal('hide');
+          router.push("/tags/" + tag.id);
+        })
+        .catch(
+          function(error) {
+            this.errors = ["Invalid email or password."];
+            this.email = "";
+            this.password = "";
+          }.bind(this)
+        );
+    }
   },
   computed: {}
+};
+var TagsShowPage = {
+  template: "#tags-show-page",
+  data: function() {
+    return {
+      tags: [],
+      tag: {},
+      currentPost: {},
+      email: "",
+      password: "",
+      errors: []
+    };
+  },
+  created: function() {
+    axios.get("/tags/").then(function(response) {
+      console.log(response.data)
+      this.tags = response.data
+    }.bind(this));
+    axios.get("/tags/" + this.$route.params.id).then(function(response) {
+      console.log(response.data)
+      this.tag = response.data
+    }.bind(this));
+  },
+  methods: {
+    route: function(new_tag) {
+      // router.push("/tags/" + new_tag.id)
+      axios.get("/tags/" + new_tag.id).then(function(response) {
+        console.log(response.data)
+        this.tag = response.data
+      }.bind(this));
+    },
+    isLoggedIn: function() {
+      if (localStorage.getItem("jwt")) {
+        return true
+      } else {
+        return false
+      }
+    },
+    setCurrentPost: function(post) {
+      this.currentPost = post;
+      console.log(this.currentPost);
+    },
+    hideModal: function() {
+      $('#exampleModal').modal('hide');
+    },
+    submit: function() {
+      var params = {
+        auth: { email: this.email, password: this.password }
+      };
+      axios
+        .post("/user_token", params)
+        .then(function(response) {
+          console.log(response.data.jwt)
+          axios.defaults.headers.common["Authorization"] =
+            "Bearer " + response.data.jwt;
+          localStorage.setItem("jwt", response.data.jwt);
+          axios.get("/users/me").then(function(response) { localStorage.setItem("user_id", response.data.id);
+          }.bind(this));
+          console.log(localStorage)
+          $('#exampleModal').modal('hide');
+          router.push("/tags/" + tag.id);
+        })
+        .catch(
+          function(error) {
+            this.errors = ["Invalid email or password."];
+            this.email = "";
+            this.password = "";
+          }.bind(this)
+        );
+    }
+  }
 };
 
 // ACCOUNTS
@@ -108,9 +218,9 @@ var LogoutPage = {
   }
 };
 
-// USERS
-var UsersShowPage = {
-  template: "#user-show-page",
+// PROFILE
+var ProfileShowPage = {
+  template: "#profile-show-page",
   data: function() {
     return {
       user: {}
@@ -124,8 +234,8 @@ var UsersShowPage = {
   },
   methods: {}
 };
-var UsersEditPage = {
-  template: "#user-edit-page",
+var ProfileEditPage = {
+  template: "#profile-edit-page",
   data: function() {
     return {
       first_name: "",
@@ -216,31 +326,6 @@ var PostsNewPage = {
   },
   computed: {}
 };
-var PostsIndexPage = {
-  template: "#posts-index-page",
-  data: function() {
-    return {
-      posts: []
-    };
-  },
-  created: function() {
-    axios.get("/posts").then(function(response) {
-
-      this.posts = response.data
-      console.log(response.data)
-    }.bind(this))
-  },
-  methods: {
-    isLoggedIn: function() {
-      if (localStorage.getItem("jwt")) {
-        return true
-      } else {
-        return false
-      }
-    }
-  },
-  computed: {}
-};
 var PostsShowPage = {
   template: "#posts-show-page",
   data: function() {
@@ -311,51 +396,6 @@ var PostsEditPage = {
   }
 };
 
-// TAGS
-var TagsShowPage = {
-  template: "#tags-show-page",
-  data: function() {
-    return {
-      tags: [],
-      tag: {},
-      currentPost: {}
-    };
-  },
-  created: function() {
-    axios.get("/tags/").then(function(response) {
-      console.log(response.data)
-      this.tags = response.data
-    }.bind(this));
-    axios.get("/tags/" + this.$route.params.id).then(function(response) {
-      console.log(response.data)
-      this.tag = response.data
-    }.bind(this));
-  },
-  methods: {
-    route: function(new_tag) {
-      // router.push("/tags/" + new_tag.id)
-      axios.get("/tags/" + new_tag.id).then(function(response) {
-        console.log(response.data)
-        this.tag = response.data
-      }.bind(this));
-    },
-    isLoggedIn: function() {
-      if (localStorage.getItem("jwt")) {
-        return true
-      } else {
-        return false
-      }
-    },
-    setCurrentPost: function(post) {
-      this.currentPost = post;
-      console.log(this.currentPost);
-    },
-    hideModal: function() {
-      $('#exampleModal').modal('hide');
-    }
-  }
-};
-
 // Framework
 var router = new VueRouter({
   routes: [
@@ -363,9 +403,8 @@ var router = new VueRouter({
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
-    { path: "/profile", component: UsersShowPage },
-    { path: "/profile/edit", component: UsersEditPage },
-    { path: "/posts", component: PostsIndexPage },
+    { path: "/profile", component: ProfileShowPage },
+    { path: "/profile/edit", component: ProfileEditPage },
     { path: "/posts/new", component: PostsNewPage },
     { path: "/posts/:id", component: PostsShowPage },
     { path: "/posts/:id/edit", component: PostsEditPage },
