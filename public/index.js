@@ -350,9 +350,8 @@ var TagsShowPage = {
       this.currentPost = post;
       console.log(this.currentPost);
     },
-    goToPost: function(post) {
+    hideModal: function() {
       $('#exampleModal').modal('hide');
-      router.push("/posts/" + post.id);
     }
   }
 };

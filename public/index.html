@@ -365,7 +365,7 @@
               <!-- This button will send the author -->
               <!-- A notification that userA has viewed this.post -->
               <!-- <a v-bind:href="'/#/posts/' + currentPost.id" class="btn btn-primary" >Agree</a> -->
-              <a v-on:click="goToPost(currentPost)" class="btn btn-primary" >Agree</a>
+              <a v-bind:href="'/#/posts/' + currentPost.id" v-on:click="hideModal()" class="btn btn-primary" >Agree</a>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -387,7 +387,7 @@
 
             </div>
             <div class="modal-body">
-              <p>Sign Up!</p>
+              <a href="/#/signup" v-on:click="hideModal()" class="btn btn-primary" >Sign up</a>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
