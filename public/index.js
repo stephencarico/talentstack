@@ -137,6 +137,24 @@ var TagsShowPage = {
     }
   }
 };
+var UsersShowPage = {
+  template: "#users-show-page",
+  data: function() {
+    return {
+      user: {}
+    }
+  },
+  created: function() {
+    axios
+      .get("/users/" + this.$route.params.id).then(function(response) {
+        console.log(response.data);
+        this.user = response.data;
+      }.bind(this));
+  },
+  methods: {
+
+  }
+}
 
 // ACCOUNTS
 var SignupPage = {
@@ -283,24 +301,6 @@ var ProfileEditPage = {
     }
   }
 };
-var UsersShowPage = {
-  template: "#users-show-page",
-  data: function() {
-    return {
-      user: {}
-    }
-  },
-  created: function() {
-    axios
-      .get("/users/" + this.$route.params.id).then(function(response) {
-        console.log(response.data);
-        this.user = response.data;
-      }.bind(this));
-  },
-  methods: {
-
-  }
-}
 
 // POSTS
 var PostsNewPage = {
@@ -350,7 +350,9 @@ var PostsShowPage = {
     return {
       post: {},
       user: {},
-      users: []
+      users: [],
+      comment_body: "",
+      comment_errors: []
     };
   },
   created: function() {
@@ -366,7 +368,36 @@ var PostsShowPage = {
       this.users = response.data;
     }.bind(this));
   },
-  methods: {}
+  methods: {
+    submit: function() {
+      var params = {
+        body: this.comment_body,
+        post_id: this.post.id
+      };
+      axios
+        .post("/posts/" + this.post.id + "/comments", params)
+        .then(function(response) {
+          // Page refresh showcasing updated index comments
+          // not working yet.
+          router.push("/posts/" + this.$route.params.id);
+        })
+        .catch(
+          function(error) {
+            this.comment_errors = error.response.data.errors;
+            console.log(this.comment_errors)
+          }.bind(this)
+        );
+    },
+    deleteComment: function(comment) {
+      axios.delete("/posts/" + this.post.id + "/comments/" + comment.id).then(function(response) {
+        var index = this.comments.indexOf(comment);
+        this.comments.splice(index, 1);
+      }.bind(this));
+      // Page refresh showcasing updated index comments
+      // not working yet.
+      router.push("/posts/" + this.post.id)
+    }
+  }
 };
 var PostsEditPage = {
   template: "#posts-edit-page",

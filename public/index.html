@@ -448,10 +448,16 @@
             <div v-for="user in users">
               <a v-if="user.id == comment.user_id" v-bind:href="'/#/users/' + user.id">{{user.full_name}}</a>
             </div>
+            <button class="btn btn-secondary" v-on:click="deleteComment(comment)">Delete Comment</button>
           </div>
         </div>
       </div>
     </div>
+    <div class="form-group">
+      <label>Add Comment:</label>
+      <textarea type="text" class="form-control" rows="5" v-model="comment_body"></textarea>
+    </div>
+    <button class="btn btn-primary" v-on:click="submit()">Submit</button>
   </div>
 </template>
 <!-- Edit Post Page -->
