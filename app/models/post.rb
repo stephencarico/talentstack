@@ -26,8 +26,8 @@ class Post < ApplicationRecord
       pitch: pitch,
       body: body,
       seeking: seeking,
-      # tags: tags.as_json
-      tags: simple_tags
+      tags: simple_tags,
+      comments: comments.as_json
     }
   end
 end

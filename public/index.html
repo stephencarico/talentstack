@@ -256,6 +256,27 @@
     </div>
   </div>
 </template>
+<!-- User Show Page -->
+<template id="users-show-page">
+  <div class="vue-component">
+    
+    <h2>{{ user.full_name }} <button class="btn btn-primary">Message</button></h2>
+    <img :src="user.image" alt="">
+    <p>{{ user.bio }}</p>
+    <div class="row">
+      <div v-for="post in user.posts" class="col-md-4">
+        <div class="card mb-2">
+          <div class="card-body">
+            <h3 class="card-title">{{ post.title }}</h3>
+            <p class="card-text">{{ post.pitch }}</p>
+            <!-- <p class="card-text">Likes: {{ post.likes }}</p> -->
+            <a v-bind:href="'/#/posts/' + post.id" class="btn btn-secondary" >View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <!-- ACCOUNT -->
 <!-- Login Page -->
@@ -407,7 +428,7 @@
 <!-- Show Post Page -->
 <template id="posts-show-page">
   <div class="vue-component">
-    <h1>{{ post.title }}</h1>
+    <h1>{{ post.title }} <a v-if="post.user_id == user.id" v-bind:href="'/#/posts/' + post.id + '/edit'" class="btn btn-primary">Edit</a></h1>
     <p>{{ post.pitch }}</p>
     <p>----------------------</p>
     <h4>Overview:</h4>
@@ -418,7 +439,19 @@
       <button class="btn btn-secondary">#{{tag.title}}</button>
     </div>
     <br>
-    <a v-if="post.user_id == user.id" v-bind:href="'/#/posts/' + post.id + '/edit'" class="btn btn-primary">Edit</a>
+    <p>Comments:</p>
+    <div v-for="comment in post.comments">
+      <div class="card mb-2">
+        <div class="card-body">
+          <div class="container">
+            <p>{{comment.body}}</p>
+            <div v-for="user in users">
+              <a v-if="user.id == comment.user_id" v-bind:href="'/#/users/' + user.id">{{user.full_name}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <!-- Edit Post Page -->

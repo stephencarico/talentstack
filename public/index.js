@@ -283,6 +283,24 @@ var ProfileEditPage = {
     }
   }
 };
+var UsersShowPage = {
+  template: "#users-show-page",
+  data: function() {
+    return {
+      user: {}
+    }
+  },
+  created: function() {
+    axios
+      .get("/users/" + this.$route.params.id).then(function(response) {
+        console.log(response.data);
+        this.user = response.data;
+      }.bind(this));
+  },
+  methods: {
+
+  }
+}
 
 // POSTS
 var PostsNewPage = {
@@ -331,7 +349,8 @@ var PostsShowPage = {
   data: function() {
     return {
       post: {},
-      user: {}
+      user: {},
+      users: []
     };
   },
   created: function() {
@@ -339,10 +358,12 @@ var PostsShowPage = {
       console.log(response.data)
       this.post = response.data
     }.bind(this));
-    // this.user_id = localStorage.user_id
     axios.get("/users/me").then(function(response) {
       console.log(response.data);
       this.user = response.data;
+    }.bind(this));
+    axios.get("/users").then(function(response) {
+      this.users = response.data;
     }.bind(this));
   },
   methods: {}
@@ -405,6 +426,7 @@ var router = new VueRouter({
     { path: "/logout", component: LogoutPage },
     { path: "/profile", component: ProfileShowPage },
     { path: "/profile/edit", component: ProfileEditPage },
+    { path: "/users/:id", component: UsersShowPage },
     { path: "/posts/new", component: PostsNewPage },
     { path: "/posts/:id", component: PostsShowPage },
     { path: "/posts/:id/edit", component: PostsEditPage },
