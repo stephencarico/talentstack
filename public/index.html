@@ -388,7 +388,6 @@
     </div>
     <div class="form-group">
       <label>Profile Picture:</label> 
-      <!-- <input type="text" class="form-control" v-model="profile_picture"> -->
       <input type="file" v-on:change="uploadFile($event)">
     </div>
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
@@ -454,7 +453,7 @@
 
     <!-- Comment Sections -->
     <p>Comments:</p>
-    <div v-for="comment in post.comments">
+    <div v-for="comment in comments">
       <div class="card mb-2">
         <div class="card-body">
           <div class="container">
@@ -469,7 +468,7 @@
     </div>
     <div class="form-group">
       <label>Add Comment:</label>
-      <textarea type="text" class="form-control" rows="5" v-model="comment_body"></textarea>
+      <textarea id="comment" type="text" class="form-control" rows="5" v-model="comment_body"></textarea>
     </div>
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
   </div>

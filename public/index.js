@@ -361,14 +361,16 @@ var PostsShowPage = {
       post: {},
       user: {},
       users: [],
+      comments: [],
       comment_body: "",
       comment_errors: []
     };
   },
   created: function() {
     axios.get("/posts/" + this.$route.params.id).then(function(response) {
-      console.log(response.data)
-      this.post = response.data
+      console.log(response.data);
+      this.post = response.data;
+      this.comments = response.data.comments;
     }.bind(this));
     axios.get("/users/me").then(function(response) {
       console.log(response.data);
@@ -387,14 +389,14 @@ var PostsShowPage = {
       axios
         .post("/posts/" + this.post.id + "/comments", params)
         .then(function(response) {
-          // Page refresh showcasing updated index comments
-          // not working yet.
-          router.push("/posts/" + this.$route.params.id);
-        })
+          console.log(response.data);
+          this.comments.push(response.data)
+          this.comment_body = "";
+        }.bind(this))
         .catch(
           function(error) {
-            this.comment_errors = error.response.data.errors;
-            console.log(this.comment_errors)
+            // this.comment_errors = error;
+            console.log(error)
           }.bind(this)
         );
     },
@@ -403,9 +405,6 @@ var PostsShowPage = {
         var index = this.comments.indexOf(comment);
         this.comments.splice(index, 1);
       }.bind(this));
-      // Page refresh showcasing updated index comments
-      // not working yet.
-      router.push("/posts/" + this.post.id)
     }
   }
 };

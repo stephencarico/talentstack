@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
       body: params[:body]
       )
     if comment.save
-      render json: {message: 'Comment created successfully'}, status: :created
+      render json: comment.as_json, status: :created
     else
       render json: {errors: comment.errors.full_messages},
       status: :bad_request
