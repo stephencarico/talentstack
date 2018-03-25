@@ -195,6 +195,7 @@
     </div>
     <!-- MODALS -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
       <!-- If Logged In -->
       <div v-if="isLoggedIn()">
         <div class="modal-dialog" role="document">
@@ -448,7 +449,7 @@
             <div v-for="user in users">
               <a v-if="user.id == comment.user_id" v-bind:href="'/#/users/' + user.id">{{user.full_name}}</a>
             </div>
-            <button class="btn btn-secondary" v-on:click="deleteComment(comment)">Delete Comment</button>
+            <button v-if="comment.user_id == user.id"class="btn btn-secondary" v-on:click="deleteComment(comment)">Delete Comment</button>
           </div>
         </div>
       </div>
