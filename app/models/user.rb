@@ -2,7 +2,14 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
 
-  mount_uploader :image, ImageUploader
+  has_attached_file :profile_picture
+    
+  validates_attachment :profile_picture,
+    content_type: {
+      content_type: ["image/jpeg", "image/gif", "image/png"]
+    }
+
+  # mount_uploader :profile_picture, ImageUploader
 
   has_secure_password
   validates :first_name, presence: true
@@ -15,8 +22,8 @@ class User < ApplicationRecord
       first_name: first_name,
       last_name: last_name,
       full_name: first_name + " " + last_name,
-      profile_picture: profile_picture,
       bio: bio,
+      profile_picture: profile_picture,
       posts: posts.as_json
     }
   end

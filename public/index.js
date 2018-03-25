@@ -259,7 +259,6 @@ var ProfileEditPage = {
       first_name: "",
       last_name: "",
       bio: "",
-      profile_picture: "",
       errors: []
     };
   },
@@ -269,17 +268,28 @@ var ProfileEditPage = {
         this.first_name = response.data.first_name;
         this.last_name = response.data.last_name;
         this.bio = response.data.bio;
-        this.profile_picture = response.data.profile_picture;
       }.bind(this)
     );
   },
   methods: {
+    uploadFile: function(event) {
+      if (event.target.files.length > 0) {
+        var formData = new FormData();
+        formData.append("profile_picture", event.target.files[0]);
+
+        axios
+          .patch("/users/" + this.$route.params.id, formData)
+          .then(function(response) {
+            console.log(response);
+            event.target.value = "";
+          }.bind(this));
+      }
+    },
     submit: function() {
       var params = {
         first_name: this.first_name,
         last_name: this.last_name,
-        bio: this.bio,
-        profile_picture: this.profile_picture
+        bio: this.bio
       };
       axios
         .patch("/users/" + this.$route.params.id, params)
