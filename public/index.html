@@ -493,6 +493,17 @@
     </div>
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     <a v-bind:href="'/#/posts/'+ post.id" class="btn btn-secondary">Return</a>
-    <button class="btn btn-secondary" v-on:click="deletePost()">Delete Post</button>
+    <!-- <button class="btn btn-secondary" v-on:click="deletePost()">Delete Post</button> -->
+    <button class="btn btn-danger" data-toggle="modal" data-target="#deletePostModal">Delete Post</button>
+    <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h4>Are you sure you wish to delete this post?</h4>
+            <button class="btn btn-danger" v-on:click="deletePost()">Delete Post</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

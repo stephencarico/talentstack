@@ -443,7 +443,8 @@ var PostsEditPage = {
         var index = this.users.indexOf(user);
         this.users.splice(index, 1);
       }.bind(this));
-      router.push("/posts")
+      $('#deletePostModal').modal('hide');
+      router.push("/profile")
     }
   }
 };
