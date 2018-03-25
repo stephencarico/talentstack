@@ -435,6 +435,9 @@
   <div class="vue-component">
     <h1>{{ post.title }} <a v-if="post.user_id == user.id" v-bind:href="'/#/posts/' + post.id + '/edit'" class="btn btn-primary">Edit</a></h1>
     <p>{{ post.pitch }}</p>
+    Author: <div v-for="user in users">
+      <a v-if="user.id== post.user_id" v-bind:href="'/#/users/' + user.id">{{user.full_name}}</a>
+    </div>
     <p>----------------------</p>
     <h4>Overview:</h4>
     <p>{{ post.body }}</p>
@@ -444,6 +447,8 @@
       <button class="btn btn-secondary">#{{tag.title}}</button>
     </div>
     <br>
+
+    <!-- Comment Sections -->
     <p>Comments:</p>
     <div v-for="comment in post.comments">
       <div class="card mb-2">
