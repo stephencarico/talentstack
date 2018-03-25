@@ -260,9 +260,13 @@
 <template id="users-show-page">
   <div class="vue-component">
     
-    <h2>{{ user.full_name }} <button class="btn btn-primary">Message</button></h2>
-    <img :src="user.image" alt="">
-    <p>{{ user.bio }}</p>
+    <div class="card mb-2">
+      <div class="card-body">
+        <h3 class="card-title">{{ user.full_name }}</h3>
+        <img :src="user.profile_picture" alt="profile picture" style="height:100px;">
+        <p>{{ user.bio }}</p>
+      </div>
+    </div>
     <div class="row">
       <div v-for="post in user.posts" class="col-md-4">
         <div class="card mb-2">
