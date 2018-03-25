@@ -259,6 +259,7 @@ var ProfileEditPage = {
       first_name: "",
       last_name: "",
       bio: "",
+      formData: {},
       errors: []
     };
   },
@@ -274,15 +275,9 @@ var ProfileEditPage = {
   methods: {
     uploadFile: function(event) {
       if (event.target.files.length > 0) {
-        var formData = new FormData();
+        formData = new FormData();
         formData.append("profile_picture", event.target.files[0]);
-
-        axios
-          .patch("/users/" + this.$route.params.id, formData)
-          .then(function(response) {
-            console.log(response);
-            event.target.value = "";
-          }.bind(this));
+        console.log(formData)
       }
     },
     submit: function() {
@@ -301,6 +296,13 @@ var ProfileEditPage = {
             this.errors = error.response.data.errors;
           }.bind(this)
         );
+      axios
+        .patch("/users/" + this.$route.params.id, formData)
+        .then(function(response) {
+          console.log(response);
+          // event.target.value = "";
+          formData = {}
+        }.bind(this));
     },
     deleteUser: function() {
       axios.delete("/users/:id").then(function(response) {
