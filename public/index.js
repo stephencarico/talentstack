@@ -423,6 +423,8 @@ var PostsEditPage = {
   created: function() {
     axios.get("/posts/" + this.$route.params.id).then(function(response) {
       this.post = response.data;
+      this.tag_ids = response.data.tags.map( tag => tag.id )
+      console.log(this.checkedIds)
     }.bind(this))
     axios.get("/tags/").then(function(response) {
       console.log(response.data)

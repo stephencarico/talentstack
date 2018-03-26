@@ -500,7 +500,9 @@
     <div class="form-group">
       <label>Tags:</label>
       <div v-for="tag in tags">
-        <input type="checkbox" v-model="tag_ids" :id="tag.title" :value="tag.id"> {{tag.title}}<br>
+        <div>
+          <input type="checkbox" v-model="tag_ids" :id="tag.title" :value="tag.id"> {{tag.title}}<br>
+        </div>
       </div>
     </div>
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
