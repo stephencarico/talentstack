@@ -2,21 +2,73 @@
 <html lang="en">
 <head>
   <!-- Require Meta Tags -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="index.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>TalentStack</title>
+
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic,800,800italic,300,300italic">
+
+  <!-- Begin: MAIN CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/plugins-min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/menu-overright.css">
+  <link href="assets/css/colors/aqua-yellow.css" type="text/css" media="all" rel="stylesheet" />
+  <!-- End: MAIN CSS -->
+
+  <!-- Begin: REQUIRED FOR THIS PAGE ONLY -->
+  <link rel="stylesheet" type="text/css" href="assets/plugins/rs-plugin/css/settings-min.css" media="screen" />       <!-- RevolutionSlider -->
+  <link rel="stylesheet" type="text/css" href="assets/plugins/rs-plugin/css/style.css" media="screen" />              <!-- RevolutionSlider -->
+  <link rel="stylesheet" type="text/css" href="assets/plugins/rs-plugin/css/navstylechange.css" media="screen" />         <!-- RevolutionSlider -->
+  <link rel="stylesheet" property="stylesheet" id="rs-icon-set-fa-icon-css" type="text/css" href="assets/plugins/rs-plugin/font/font-awesome/css/font-awesome.css" media="screen" />  <!-- RevolutionSlider -->
+  <link rel="stylesheet" type="text/css" media="screen" href="assets/plugins/flexslider/css/flexslider.css" />
+
+  <!-- Bootstrap CSS -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+  <!-- Custom CSS -->
+  <!-- <link rel="stylesheet" href="index.css"> -->
 </head>
-<body>
+<body class="switcher_boxed boxed">
   <div id="vue-app">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- ####### THEME NAVBAR ###### -->
+    <header class="main-header sticky-header dark">
+      <nav class="navbar navbar-default">
+        <div class="container position-relative">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header border">
+            <!-- Begin: RESPONSIVE MENU TOGGLER -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-bars"></i>
+            </button>
+            <!-- End: RESPONSIVE MENU TOGGLER -->
+            <!-- Begin: LOGO -->
+            <a class="navbar-brand logo" href="/#/">TalentStack</a>
+            <!-- End: LOGO -->
+          </div>
+          <!-- /.navbar-collapse -->
+          <div class="collapse navbar-collapse text-weight-400" id="nav-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right margin-right-0">
+              <li class="dropdown">
+                  <a href="/#/signup">Sign Up</a>
+              </li>
+              <li class="dropdown">
+                  <a href="/#/login">Log In</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ####### ORIGINAL NAV BAR ####### -->
+<!--     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/#/">TalentStack</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -37,7 +89,7 @@
           </div>
         </ul>
       </div>
-    </nav>
+    </nav> -->
 
     <div class="container">
       <router-view></router-view>
@@ -54,7 +106,7 @@
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
 
   <script src="index.js" defer></script>
 </body>
@@ -68,14 +120,58 @@
 <!-- Home Page -->
 <template id="home-page">
   <div class="vue-component">
-    <div class="row">
+    <header class="main-header sticky-header logo-position-top-setting logo-position-top border-bottom-light">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid position-relative">
+          <div class="logo-position-top-menu">
+            <div class="collapse navbar-collapse pull-right search-shop-dropdown" id="nav-navbar-collapse-2">
+              
+                <ul class="nav navbar-nav navbar-right margin-right-0">
+                  <li class="dropdown">
+                    <a href="/#/"> Home</a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="/#/tags/1"> Design&Tech</a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="/#/tags/2"> Film</a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="/#/tags/3"> Music</a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="/#/tags/4"> Games</a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="/#/tags/5"> Health&Fitness</a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="/#/tags/6"> Food&Craft</a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="/#/tags/7"> Publishing</a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="/#/tags/8"> Arts</a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="/#/tags/9"> Other</a>
+                  </li>
+                </ul>
+
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- <div id="masnory-filter" class="text-center">
       <a class="btn btn-primary" href="/">All</a>
       <br>
       <div v-for="tag in tags">
         <a v-bind:href="'/#/tags/' + tag.id" class="btn btn-primary">{{ tag.title }}</a>
         <br>
       </div>
-    </div>
+    </div> -->
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-4">TalentStack</h1>
@@ -163,14 +259,34 @@
 <!-- Show Posts by Tags Pages -->
 <template id="tags-show-page">
   <div class="vue-component">
-    <div class="row">
+    <header class="main-header sticky-header logo-position-top-setting logo-position-top border-bottom-light">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid position-relative">
+          <div class="logo-position-top-menu">
+            <div class="collapse navbar-collapse pull-right search-shop-dropdown" id="nav-navbar-collapse-2">
+              
+                <ul class="nav navbar-nav navbar-right margin-right-0">
+                  <li class="dropdown">
+                    <a href="/#/"> Home</a>
+                  </li>
+                  <li class="dropdown" v-for="tag in tags">
+                    <a v-bind:href="'/#/tags/'+ tag.id" v-on:click="route(tag)"> {{tag.title}}</a>
+                  </li>
+                </ul>
+                
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- <div class="row">
       <a class="btn btn-primary" href="/">All</a>
       <br>
       <div v-for="tag in tags">
         <a class="btn btn-primary" v-on:click="route(tag)">{{ tag.title }}</a>
         <br>
       </div>
-    </div>
+    </div> -->
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-4">{{ tag.title }}</h1>
