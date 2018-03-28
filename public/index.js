@@ -36,7 +36,7 @@ var HomePage = {
       console.log(this.currentPost);
     },
     hideModal: function() {
-      $('#exampleModal').modal('hide');
+      $('#postModal').modal('hide');
     },
     submit: function() {
       var params = {

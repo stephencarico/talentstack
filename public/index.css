@@ -1,4 +1,14 @@
-body {
+/*body {
   font-family: Futura, sans-serif;
   background-color: whitesmoke;
+}*/
+
+#posts-container {
+  overflow: visible !important;
+}
+
+.modal {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
