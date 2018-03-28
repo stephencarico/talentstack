@@ -10,6 +10,10 @@ class Post < ApplicationRecord
   validates :body, presence: true
   validates :seeking, presence: :true
 
+  def friendly_created_at
+    created_at.strftime("%b %d, %Y")
+  end
+
   def simple_tags
     simple_tags = []
     tags.each do |tag|
@@ -21,6 +25,7 @@ class Post < ApplicationRecord
   def as_json
     {
       id: id,
+      created_at: friendly_created_at,
       user_id: user_id,
       title: title,
       pitch: pitch,

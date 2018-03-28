@@ -120,64 +120,93 @@
 <!-- Home Page -->
 <template id="home-page">
   <div class="vue-component">
-    <header class="main-header sticky-header logo-position-top-setting logo-position-top border-bottom-light">
-      <nav class="navbar navbar-default">
-        <div class="container-fluid position-relative">
-          <div class="logo-position-top-menu">
-            <div class="collapse navbar-collapse pull-right search-shop-dropdown" id="nav-navbar-collapse-2">
-              
+    <!-- TAGS BAR -->
+    <body class="switcher_boxed boxed">
+      <header class="main-header sticky-header logo-position-top-setting logo-position-top border-bottom-light">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid position-relative">
+            <div class="logo-position-top-menu">
+              <div class="collapse navbar-collapse pull-right search-shop-dropdown" id="nav-navbar-collapse-2">
+                
                 <ul class="nav navbar-nav navbar-right margin-right-0">
                   <li class="dropdown">
                     <a href="/#/"> Home</a>
                   </li>
-                  <li class="dropdown">
-                    <a href="/#/tags/1"> Design&Tech</a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="/#/tags/2"> Film</a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="/#/tags/3"> Music</a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="/#/tags/4"> Games</a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="/#/tags/5"> Health&Fitness</a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="/#/tags/6"> Food&Craft</a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="/#/tags/7"> Publishing</a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="/#/tags/8"> Arts</a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="/#/tags/9"> Other</a>
+                  <li class="dropdown" v-for="tag in tags">
+                    <a v-bind:href="'/#/tags/'+ tag.id" v-on:click="route(tag)"> {{tag.title}}</a>
                   </li>
                 </ul>
 
+              </div>
             </div>
           </div>
-        </div>
-      </nav>
-    </header>
-    <!-- <div id="masnory-filter" class="text-center">
-      <a class="btn btn-primary" href="/">All</a>
-      <br>
-      <div v-for="tag in tags">
-        <a v-bind:href="'/#/tags/' + tag.id" class="btn btn-primary">{{ tag.title }}</a>
-        <br>
-      </div>
-    </div> -->
-    <div class="jumbotron jumbotron-fluid">
+        </nav>
+      </header>
+      <section class="page-main-heading padding-top-small padding-bottom-small light box-shadow-inside">
+          <div class="container">
+              <div class="row">
+                  <div class="text-center">
+                      <h2 class="text-weight-300">Home</h2>
+                  </div>
+              </div>
+          </div>
+      </section>
+    </body>
+
+    <!-- BODY -->
+    <!-- <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-4">TalentStack</h1>
       </div>
-    </div>
-    <div class="row">
+    </div> -->
+    <section>
+        <div class="container">
+            <div class="posts">
+                <div class="row masnory-container">
+                    <div class="col-md-4 col-sm-6 masnory-item" v-for="post in posts">
+                        <div class="row blog">
+                            <div class="col-md-12">
+                                <div class="blog-view">
+                                    <div class="blog-media">
+                                        <a class="" href="assets/images/blog/blog-1.jpg" title="..." data-gal="prettyPhoto">
+                                            <img src="assets/images/blog/blog-1-thumb.jpg" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="blog-meta">
+                                        <ul>
+                                            <li><a title="" href="#"><i class="fa fa-camera-retro"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="blog-text">
+                                    <h3 class="title text-capitalize text-weight-700"><a href="#">{{ post.title }}</a></h3>
+                                    <ul class="meta-tags">
+                                        <li><i class="fa fa-calendar"></i> <a>{{ post.created_at }}</a></li>
+                                        <li>|</li>
+                                        <li><i class="fa fa-user"></i> <a href="#">Admin</a></li>
+                                        <li>|</li>
+                                        <li><i class="fa fa-tags"></i> <a href="#">Photography</a>, <a href="#">Web</a></li>
+                                        <li>|</li>
+                                        <li><i class="fa fa-comments"></i> <a href="#">24</a></li>
+                                    </ul>
+                                    <p>{{ post.pitch }}</p>
+                                    <a href="#" class="btn btn-base">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row blog-hr">
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <div class="row">
       <div v-for="post in posts" class="col-md-4">
         <div class="card mb-2">
           <div class="card-body">
@@ -187,12 +216,12 @@
               </div>
             </div>
             <p class="card-text">{{ post.pitch }}</p>
-            <!-- <p class="card-text">Likes: {{ post.likes }}</p> -->
             <a v-on:click="setCurrentPost(post)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View</a>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+
     <!-- MODALS -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <!-- If Logged In -->
@@ -256,9 +285,11 @@
     </div>
   </div>
 </template>
-<!-- Show Posts by Tags Pages -->
+<!-- Tags Pages -->
 <template id="tags-show-page">
   <div class="vue-component">
+
+    <!-- TAGS BAR -->
     <header class="main-header sticky-header logo-position-top-setting logo-position-top border-bottom-light">
       <nav class="navbar navbar-default">
         <div class="container-fluid position-relative">
@@ -279,19 +310,22 @@
         </div>
       </nav>
     </header>
-    <!-- <div class="row">
-      <a class="btn btn-primary" href="/">All</a>
-      <br>
-      <div v-for="tag in tags">
-        <a class="btn btn-primary" v-on:click="route(tag)">{{ tag.title }}</a>
-        <br>
-      </div>
-    </div> -->
-    <div class="jumbotron jumbotron-fluid">
+    <section class="page-main-heading padding-top-small padding-bottom-small light box-shadow-inside">
+        <div class="container">
+            <div class="row">
+                <div class="text-center">
+                    <h2 class="text-weight-300">{{ tag.title }}</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BODY -->
+    <!-- <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-4">{{ tag.title }}</h1>
       </div>
-    </div>
+    </div> -->
     <div class="row">
       <div v-for="post in tag.posts" class="col-md-4">
         <div class="card mb-2">
@@ -302,12 +336,12 @@
               </div>
             </div>
             <p class="card-text">{{ post.pitch }}</p>
-            <!-- <p class="card-text">Likes: {{ post.likes }}</p> -->
             <a v-on:click="setCurrentPost(post)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View</a>
           </div>
         </div>
       </div>
     </div>
+
     <!-- MODALS -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
