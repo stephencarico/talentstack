@@ -134,7 +134,7 @@ var TagsShowPage = {
           axios.get("/users/me").then(function(response) { localStorage.setItem("user_id", response.data.id);
           }.bind(this));
           console.log(localStorage)
-          $('#exampleModal').modal('hide');
+          $('#postModal').modal('hide');
           router.push("/tags/" + tag.id);
         })
         .catch(
