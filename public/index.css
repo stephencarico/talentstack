@@ -10,5 +10,18 @@
 .modal {
   position: relative;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-100%);
+}
+
+.modal label {
+  width:70px;
+}
+
+.modal .form-control {
+  display:inline-block;
+  width:40%;
+}
+
+.btn-primary {
+  margin-bottom: 10px;
 }

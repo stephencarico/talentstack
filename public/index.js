@@ -7,6 +7,7 @@ var HomePage = {
     return {
       tags: {},
       posts: [],
+      users: [],
       currentPost: {},
       email: "",
       password: "",
@@ -21,6 +22,10 @@ var HomePage = {
     axios.get("/posts/").then(function(response) {
       console.log(response.data)
       this.posts = response.data
+    }.bind(this));
+    axios.get("/users").then(function(response) {
+      console.log(response.data)
+      this.users = response.data
     }.bind(this));
   },
   methods: {
@@ -71,6 +76,7 @@ var TagsShowPage = {
   data: function() {
     return {
       tags: [],
+      users: [],
       tag: {},
       currentPost: {},
       email: "",
@@ -86,6 +92,10 @@ var TagsShowPage = {
     axios.get("/tags/" + this.$route.params.id).then(function(response) {
       console.log(response.data)
       this.tag = response.data
+    }.bind(this));
+    axios.get("/users").then(function(response) {
+      console.log(response.data)
+      this.users = response.data
     }.bind(this));
   },
   methods: {
@@ -141,7 +151,8 @@ var UsersShowPage = {
   template: "#users-show-page",
   data: function() {
     return {
-      user: {}
+      user: {},
+      posts: []
     }
   },
   created: function() {
@@ -150,10 +161,13 @@ var UsersShowPage = {
         console.log(response.data);
         this.user = response.data;
       }.bind(this));
+    axios.get("/posts/").then(function(response) {
+      console.log(response.data)
+      this.posts = response.data
+    }.bind(this));
   },
   methods: {
-
-  }
+  },
 }
 
 // ACCOUNTS

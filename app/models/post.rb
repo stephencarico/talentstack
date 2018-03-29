@@ -22,6 +22,14 @@ class Post < ApplicationRecord
     return simple_tags
   end
 
+  def comment_count
+    count = 0
+    comments.each do |n|
+      count += 1
+    end
+    return count
+  end
+
   def as_json
     {
       id: id,
@@ -32,7 +40,8 @@ class Post < ApplicationRecord
       body: body,
       seeking: seeking,
       tags: simple_tags,
-      comments: comments.as_json
+      comments: comments.as_json,
+      comment_count: comment_count
     }
   end
 end
