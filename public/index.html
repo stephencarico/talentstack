@@ -274,15 +274,9 @@
                 <div class="col-md-12">
                   <div class="blog-view">
                     <div class="blog-media">
-                      <a class="" href="assets/images/blog/blog-1.jpg" title="..." data-gal="prettyPhoto">
-                          <!-- <img src="assets/images/blog/blog-1-thumb.jpg" alt="..."> -->
+                      <a v-on:click="setCurrentPost(post)" data-toggle="modal" data-target="#postModal">
                           <img :src="post.image" :alt="post.title">
                       </a>
-                    </div>
-                    <div class="blog-meta">
-                      <ul>
-                          <li><a title="" href="#"><i class="fa fa-camera-retro"></i></a></li>
-                      </ul>
                     </div>
                   </div>
                 </div>
@@ -389,7 +383,7 @@
               
                 <ul class="nav navbar-nav navbar-right margin-right-0">
                   <li class="dropdown">
-                    <a href="/#/"> Home</a>
+                    <a href="/#/">Home</a>
                   </li>
                   <li class="dropdown" v-for="tag in tags">
                     <a v-bind:href="'/#/tags/'+ tag.id" v-on:click="route(tag)"> {{tag.title}}</a>
@@ -442,15 +436,9 @@
                 <div class="col-md-12">
                   <div class="blog-view">
                     <div class="blog-media">
-                      <a class="" href="assets/images/blog/blog-1.jpg" title="..." data-gal="prettyPhoto">
-                          <!-- <img src="assets/images/blog/blog-1-thumb.jpg" alt="..."> -->
+                      <a v-on:click="setCurrentPost(post)" data-toggle="modal" data-target="#postModal">
                           <img :src="post.image" :alt="post.title">
                       </a>
-                    </div>
-                    <div class="blog-meta">
-                      <ul>
-                          <li><a title="" href="#"><i class="fa fa-camera-retro"></i></a></li>
-                      </ul>
                     </div>
                   </div>
                 </div>
@@ -496,7 +484,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <p>To maintain your business's competitive advantage, use a Non-Disclosure Agreement (NDA) to protect your proprietary information. Having an NDA form helps protect your intellectual property, like your trade secrets, from getting into the wrong hands. Get it in writing before sharing any confidential information, so both parties understand their duties and privileges.
+              <p>To maintain this business's competitive advantage, we use a Non-Disclosure Agreement (NDA) to protect their proprietary information. Having an NDA form helps protect their intellectual property, like their trade secrets, from getting into the wrong hands. By clicking below, you are agreeing to the terms and conditions of a traditional NDA for this idea.
               </p>
             </div>
             <div class="modal-footer">
@@ -588,14 +576,9 @@
                   <div class="col-md-12">
                     <div class="blog-view">
                       <div class="blog-media">
-                        <a class="" href="assets/images/blog/blog-1.jpg" title="..." data-gal="prettyPhoto">
-                          <img src="assets/images/blog/blog-1-thumb.jpg" alt="...">
+                        <a v-on:click="setCurrentPost(post)" data-toggle="modal" data-target="#postModal">
+                          <img :src="post.image" :alt="post.title">
                         </a>
-                      </div>
-                      <div class="blog-meta">
-                        <ul>
-                          <li><a title="" href="#"><i class="fa fa-camera-retro"></i></a></li>
-                        </ul>
                       </div>
                     </div>
                   </div>
@@ -731,14 +714,9 @@
                   <div class="col-md-12">
                     <div class="blog-view">
                       <div class="blog-media">
-                        <a class="" href="assets/images/blog/blog-1.jpg" title="..." data-gal="prettyPhoto">
-                          <img src="assets/images/blog/blog-1-thumb.jpg" alt="...">
+                        <a v-on:click="setCurrentPost(post)" data-toggle="modal" data-target="#postModal">
+                          <img :src="post.image" :alt="post.title">
                         </a>
-                      </div>
-                      <div class="blog-meta">
-                        <ul>
-                          <li><a title="" href="#"><i class="fa fa-camera-retro"></i></a></li>
-                        </ul>
                       </div>
                     </div>
                   </div>
@@ -820,6 +798,10 @@
         <label>Pitch:</label>
         <input type="text" class="form-control" v-model="pitch">
       </div>
+      <div class="form-group">
+        <label>Image:</label>
+        <input type="text" class="form-control" v-model="image">
+      </div>
       <p>The below information will be protected by a signed agreement form. This is where any information you feel is pertinent to your idea should be placed.</p>
       <div class="form-group">
         <label>Overview:</label>
@@ -860,14 +842,7 @@
       <div class="col-md-6 col-sm-6">
           <div class="blog-view">
               <div class="blog-media">
-                  <a class="" href="assets/images/blog/blog-1.jpg" title="..." data-gal="prettyPhoto">
-                      <img src="assets/images/blog/blog-1-thumb.jpg" alt="...">
-                  </a>
-              </div>
-              <div class="blog-meta">
-                  <ul>
-                      <li><a title="" href="#"><i class="fa fa-camera-retro"></i></a></li>
-                  </ul>
+                  <img :src="post.image" :alt="post.title">
               </div>
           </div>
       </div>
