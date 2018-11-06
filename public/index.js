@@ -16,15 +16,16 @@ var HomePage = {
   },
   created: function() {
     axios.get("/tags/").then(function(response) {
-      console.log(response.data)
+      console.log(`Tags: ${response.data}`)
       this.tags = response.data
     }.bind(this));
     axios.get("/posts/").then(function(response) {
-      console.log(response.data)
+      console.log(`Posts: ${response.data}`)
+      console.log(response.data[0])
       this.posts = response.data
     }.bind(this));
     axios.get("/users").then(function(response) {
-      console.log(response.data)
+      console.log(`Users: ${response.data}`)
       this.users = response.data
     }.bind(this));
   },
@@ -38,7 +39,6 @@ var HomePage = {
     },
     setCurrentPost: function(post) {
       this.currentPost = post;
-      console.log(this.currentPost);
     },
     hideModal: function() {
       $('#postModal').modal('hide');
@@ -50,13 +50,11 @@ var HomePage = {
       axios
         .post("/user_token", params)
         .then(function(response) {
-          console.log(response.data.jwt)
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
           axios.get("/users/me").then(function(response) { localStorage.setItem("user_id", response.data.id);
           }.bind(this));
-          console.log(localStorage)
           $('#exampleModal').modal('hide');
           router.push("/tags/" + tag.id);
         })
@@ -337,6 +335,7 @@ var PostsNewPage = {
       pitch: "",
       body: "",
       seeking: "",
+      image: "",
       tag_ids: [],
       tags: [],
       errors: []
@@ -355,6 +354,7 @@ var PostsNewPage = {
         pitch: this.pitch,
         body: this.body,
         seeking: this.seeking,
+        image: this.image,
         tag_ids: this.tag_ids
       };
       axios
@@ -452,6 +452,7 @@ var PostsEditPage = {
         pitch: this.post.pitch,
         body: this.post.body,
         seeking: this.post.seeking,
+        image: this.post.image,
         tag_ids: this.tag_ids
       };
       axios

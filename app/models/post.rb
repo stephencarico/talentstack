@@ -41,7 +41,8 @@ class Post < ApplicationRecord
       seeking: seeking,
       tags: simple_tags,
       comments: comments.as_json,
-      comment_count: comment_count
+      comment_count: comment_count,
+      image: image
     }
   end
 end

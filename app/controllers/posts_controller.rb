@@ -18,7 +18,8 @@ class PostsController < ApplicationController
       title: params[:title],
       pitch: params[:pitch],
       body: params[:body],
-      seeking: params[:seeking]
+      seeking: params[:seeking],
+      image: params[:image],
       )
     if post.save
       params[:tag_ids].each do |tag_id|
@@ -39,6 +40,7 @@ class PostsController < ApplicationController
     post.pitch = params[:pitch] || post.pitch
     post.body = params[:body] || post.body
     post.seeking = params[:seeking] || post.seeking
+    post.image = params[:image] || post.image
 
     if post.save
       PostTag.where(post_id: post.id).destroy_all
