@@ -81,8 +81,7 @@
                         <!-- Begin: WIDGET -->
                         <div class="widget map-bg">
                             <h3 class="widget-title text-weight-700">Contact Us</h3>
-                            <address> <abbr title="Address"><strong>Address:</strong></abbr> San Francisco, CA </address>
-                            <address> <abbr title="Email"><strong>Email:</strong></abbr><br> <a href="mailto:#">contact@talentstack.us</a> </address>
+                            <address> <abbr title="Email"><strong>Email:</strong></abbr><br> <a href="mailto:#">stephen.r.carico@gmail.com</a> </address>
                         </div>
                         <!-- End: WIDGET -->
                     </div>
@@ -135,21 +134,6 @@
                                     <li><a class="btn btn-default btn-sm btn-dark" href="/#/tags/8">Arts</a> </li>
                                     <li><a class="btn btn-default btn-sm btn-dark" href="/#/tags/9">Other</a> </li>
                                 </ul>
-                            </div>
-                        </div>
-                        <!-- End: WIDGET -->
-                        <!-- Begin: WIDGET -->
-                        <div class="widget margin-bottom-small">
-                            <h3 class="widget-title text-weight-700">Subscribe</h3>
-                            <div class="search">
-                                <form class="form-inline">
-                                    <div class="form-group form-group-md full-width">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="Email">
-                                            <div class="input-group-btn"><button type="submit" class="btn btn-base btn-md btn-block text-uppercase text-weight-700"><i class="fa fa-send-o"></i></button></div>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                         <!-- End: WIDGET -->
@@ -206,7 +190,7 @@
         <div class="container-fluid position-relative">
           <div class="logo-position-top-menu">
               
-              <ul class="nav navbar-nav navbar-right margin-right-0">
+              <ul class="navbar-nav navbar-right margin-right-0 list-ul list-inline">
                 <li class="dropdown">
                   <a href="/#/"> Home</a>
                 </li>
@@ -342,22 +326,20 @@
   <div class="vue-component">
 
     <!-- TAGS BAR -->
-    <header class="main-header logo-position-top-setting logo-position-top border-bottom-light">
+    <header class="main-header logo-position-top border-bottom-light">
       <nav class="navbar navbar-default">
         <div class="container-fluid position-relative">
           <div class="logo-position-top-menu">
-            <div class="collapse navbar-collapse pull-right search-shop-dropdown" id="nav-navbar-collapse-2">
               
-                <ul class="nav navbar-nav navbar-right margin-right-0">
-                  <li class="dropdown">
-                    <a href="/#/">Home</a>
-                  </li>
-                  <li class="dropdown" v-for="tag in tags">
-                    <a v-bind:href="'/#/tags/'+ tag.id" v-on:click="route(tag)"> {{tag.title}}</a>
-                  </li>
-                </ul>
-                
-            </div>
+              <ul class="navbar-nav navbar-right margin-right-0 list-ul list-inline">
+                <li class="dropdown">
+                  <a href="/#/"> Home</a>
+                </li>
+                <li class="dropdown" v-for="tag in tags">
+                  <a v-bind:href="'/#/tags/'+ tag.id" v-on:click="route(tag)"> {{tag.title}}</a>
+                </li>
+              </ul>
+
           </div>
         </div>
       </nav>
