@@ -21,9 +21,6 @@
   <!-- End: MAIN CSS -->
 
   <link rel="stylesheet" href="index.css">
-
-  <!-- Bootstrap CSS -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 </head>
 <body class="switcher_boxed boxed">
   <div id="vue-app">
@@ -71,28 +68,6 @@
     </header>
 
     <!-- ####### ORIGINAL NAV BAR ####### -->
-<!--     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/#/">TalentStack</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <a v-if="!isLoggedIn()" class="dropdown-item" href="/#/signup">Signup</a>
-          <a v-if="!isLoggedIn()" class="dropdown-item" href="/#/login">Login</a>
-          <div v-if="isLoggedIn()">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/#/profile">Profile</a>
-                <a class="dropdown-item" href="/#/posts/new" v-if="isLoggedIn()">Create Post</a>
-                <a class="dropdown-item" href="/#/logout">Sign out</a>
-              </div>
-            </li>
-          </div>
-        </ul>
-      </div>
-    </nav> -->
 
     <div class="container">
       <router-view></router-view>
@@ -187,7 +162,7 @@
                 <div class="row">
                     <div class="col-md-2 col-sm-2"> <a href="/#/" class="logo"> TalentStack</a> </div>
                     <div class="col-md-10 col-sm-10 text-right">
-                        <p>© Copyright 2018 by <a href="#">TalentStack</a>. All Rights Reserved.</p>
+                        <p>Made with <i class="fa fa-heart"></i> by <a href="#">stiːvən</a> | View the code on <a href="https://github.com/stephencarico/threadz">Github</a></p>
                     </div>
                 </div>
             </div>
@@ -206,9 +181,6 @@
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
-
-  
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script type="text/javascript" src="assets/js/jquery.min.js"></script>
@@ -219,9 +191,9 @@
 </body>
 </html>
 
-<!-- /////////////// -->
-<!-- // TEMPLATES // -->
-<!-- //////////////  -->
+<!-- //////////////////////////////// -->
+<!-- ////////// TEMPLATES ////////// -->
+<!-- ///////////////////////////////  -->
 
 <!-- MAIN WEBSITE -->
 <!-- Home Page -->
@@ -260,11 +232,6 @@
     </body>
 
     <!-- BODY -->
-    <!-- <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4">TalentStack</h1>
-      </div>
-    </div> -->
     <section>
       <div class="container">
         <div class="posts">
@@ -404,28 +371,6 @@
             </div>
         </div>
     </section>
-
-    <!-- BODY -->
-    <!-- <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4">{{ tag.title }}</h1>
-      </div>
-    </div> -->
-    <!-- <div class="row">
-      <div v-for="post in tag.posts" class="col-md-4">
-        <div class="card mb-2">
-          <div class="card-body">
-            <h3 class="card-title">{{ post.title }}</h3>
-            <div class="jumbotron jumbotron-fluid">
-              <div class="container">
-              </div>
-            </div>
-            <p class="card-text">{{ post.pitch }}</p>
-            <a v-on:click="setCurrentPost(post)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View</a>
-          </div>
-        </div>
-      </div>
-    </div> -->
 
     <section>
       <div class="container">
