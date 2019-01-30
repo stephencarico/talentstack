@@ -16,16 +16,12 @@ var HomePage = {
   },
   created: function() {
     axios.get("/tags/").then(function(response) {
-      console.log(`Tags: ${response.data}`)
       this.tags = response.data
     }.bind(this));
     axios.get("/posts/").then(function(response) {
-      console.log(`Posts: ${response.data}`)
-      console.log(response.data[0])
       this.posts = response.data
     }.bind(this));
     axios.get("/users").then(function(response) {
-      console.log(`Users: ${response.data}`)
       this.users = response.data
     }.bind(this));
   },
@@ -84,15 +80,12 @@ var TagsShowPage = {
   },
   created: function() {
     axios.get("/tags/").then(function(response) {
-      console.log(response.data)
       this.tags = response.data
     }.bind(this));
     axios.get("/tags/" + this.$route.params.id).then(function(response) {
-      console.log(response.data)
       this.tag = response.data
     }.bind(this));
     axios.get("/users").then(function(response) {
-      console.log(response.data)
       this.users = response.data
     }.bind(this));
   },
@@ -100,7 +93,6 @@ var TagsShowPage = {
     route: function(new_tag) {
       // router.push("/tags/" + new_tag.id)
       axios.get("/tags/" + new_tag.id).then(function(response) {
-        console.log(response.data)
         this.tag = response.data
       }.bind(this));
     },
@@ -113,7 +105,6 @@ var TagsShowPage = {
     },
     setCurrentPost: function(post) {
       this.currentPost = post;
-      console.log(this.currentPost);
     },
     hideModal: function() {
       $('#postModal').modal('hide');
@@ -125,13 +116,11 @@ var TagsShowPage = {
       axios
         .post("/user_token", params)
         .then(function(response) {
-          console.log(response.data.jwt)
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
           axios.get("/users/me").then(function(response) { localStorage.setItem("user_id", response.data.id);
           }.bind(this));
-          console.log(localStorage)
           $('#postModal').modal('hide');
           router.push("/tags/" + tag.id);
         })
@@ -156,11 +145,9 @@ var UsersShowPage = {
   created: function() {
     axios
       .get("/users/" + this.$route.params.id).then(function(response) {
-        console.log(response.data);
         this.user = response.data;
       }.bind(this));
     axios.get("/posts/").then(function(response) {
-      console.log(response.data)
       this.posts = response.data
     }.bind(this));
   },
@@ -221,13 +208,11 @@ var LoginPage = {
       axios
         .post("/user_token", params)
         .then(function(response) {
-          console.log(response.data.jwt)
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
           axios.get("/users/me").then(function(response) { localStorage.setItem("user_id", response.data.id);
           }.bind(this));
-          console.log(localStorage)
           router.push("/");
         })
         .catch(
@@ -258,7 +243,6 @@ var ProfileShowPage = {
   },
   created: function() {
     axios.get("/users/me").then(function(response) {
-      console.log(response.data);
       this.user = response.data;
     }.bind(this));
   },
@@ -289,7 +273,6 @@ var ProfileEditPage = {
       if (event.target.files.length > 0) {
         formData = new FormData();
         formData.append("profile_picture", event.target.files[0]);
-        console.log(formData)
       }
     },
     submit: function() {
@@ -311,7 +294,6 @@ var ProfileEditPage = {
       axios
         .patch("/users/" + this.$route.params.id, formData)
         .then(function(response) {
-          console.log(response);
           // event.target.value = "";
           formData = {}
         }.bind(this));
@@ -343,7 +325,6 @@ var PostsNewPage = {
   },
   created: function() {
     axios.get("/tags/").then(function(response) {
-      console.log(response.data)
       this.tags = response.data
     }.bind(this));
   },
@@ -384,13 +365,12 @@ var PostsShowPage = {
   },
   created: function() {
     axios.get("/posts/" + this.$route.params.id).then(function(response) {
-      console.log(response.data);
       this.post = response.data;
       this.comments = response.data.comments;
     }.bind(this));
     axios.get("/users/me").then(function(response) {
-      console.log(response.data);
-      this.user = response.data;
+      this.user = response.data ? response.data : '';
+      console.log(this.user)
     }.bind(this));
     axios.get("/users").then(function(response) {
       this.users = response.data;
@@ -405,14 +385,13 @@ var PostsShowPage = {
       axios
         .post("/posts/" + this.post.id + "/comments", params)
         .then(function(response) {
-          console.log(response.data);
           this.comments.push(response.data)
           this.comment_body = "";
         }.bind(this))
         .catch(
           function(error) {
             // this.comment_errors = error;
-            console.log(error)
+            // console.log(error)
           }.bind(this)
         );
     },
@@ -438,10 +417,8 @@ var PostsEditPage = {
     axios.get("/posts/" + this.$route.params.id).then(function(response) {
       this.post = response.data;
       this.tag_ids = response.data.tags.map( tag => tag.id )
-      console.log(this.checkedIds)
     }.bind(this))
     axios.get("/tags/").then(function(response) {
-      console.log(response.data)
       this.tags = response.data
     }.bind(this));
   },

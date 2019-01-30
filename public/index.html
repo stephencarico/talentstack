@@ -225,7 +225,7 @@
                 <div class="col-md-12">
                   <div class="blog-view">
                     <div class="blog-media">
-                      <a v-on:click="setCurrentPost(post)" data-toggle="modal" data-target="#postModal">
+                      <a v-bind:href="'/#/posts/' + post.id">
                           <img :src="post.image" :alt="post.title">
                       </a>
                     </div>
@@ -233,7 +233,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="blog-text">
-                        <h3 class="title text-capitalize text-weight-700"><a v-on:click="setCurrentPost(post)" data-toggle="modal" data-target="#postModal">{{ post.title }}</a></h3>
+                        <h3 class="title text-capitalize text-weight-700"><a v-bind:href="'/#/posts/' + post.id">{{ post.title }}</a></h3>
                         <ul class="meta-tags">
                             <li><i class="fa fa-calendar"></i>{{ post.created_at }}</li>
                             <li>|</li>
@@ -244,7 +244,7 @@
                             <li><i class="fa fa-comments"></i>{{ post.comment_count }}</li>
                         </ul>
                         <p>{{ post.pitch }}</p>
-                        <a v-on:click="setCurrentPost(post)" class="btn btn-base" data-toggle="modal" data-target="#postModal">Read More</a>
+                        <a v-bind:href="'/#/posts/' + post.id" class="btn btn-base">Read More</a>
                     </div>
                 </div>
               </div>
@@ -363,7 +363,7 @@
                 <div class="col-md-12">
                   <div class="blog-view">
                     <div class="blog-media">
-                      <a v-on:click="setCurrentPost(post)" data-toggle="modal" data-target="#postModal">
+                      <a v-bind:href="'/#/posts/' + post.id">
                           <img :src="post.image" :alt="post.title">
                       </a>
                     </div>
@@ -371,7 +371,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="blog-text">
-                        <h3 class="title text-capitalize text-weight-700"><a  v-on:click="setCurrentPost(post)" data-toggle="modal" data-target="#postModal">{{ post.title }}</a></h3>
+                        <h3 class="title text-capitalize text-weight-700"><a v-bind:href="'/#/posts/' + post.id">{{ post.title }}</a></h3>
                         <ul class="meta-tags">
                             <li><i class="fa fa-calendar"></i> {{ post.created_at }}</li>
                             <li>|</li>
@@ -382,7 +382,7 @@
                             <li><i class="fa fa-comments"></i> {{ post.comment_count }}</li>
                         </ul>
                         <p>{{ post.pitch }}</p>
-                        <a v-on:click="setCurrentPost(post)" class="btn btn-base" data-toggle="modal" data-target="#postModal">Read More</a>
+                        <a v-bind:href="'/#/posts/' + post.id" class="btn btn-base">Read More</a>
                     </div>
                 </div>
               </div>
@@ -456,7 +456,6 @@
           </div>
         </div>
       </div>
-      
     </div>
 
     </div>
