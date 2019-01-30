@@ -239,7 +239,7 @@
                             <li>|</li>
                             <li><i class="fa fa-user"></i> <a v-for="user in users" v-if="user.id == post.user_id" v-bind:href="'/#/users/'+post.user_id">{{ user.full_name }}</a></li>
                             <li>|</li>
-                            <li><a data-target="#postModal" v-for="tag in post.tags" v-bind:href="'/#/tags/'+ tag.id" v-on:click="route(tag)"><i class="fa fa-tags"></i> {{ tag.title }} </a></li>
+                            <li><i class="fa fa-tags"></i><a data-target="#postModal" v-for="tag in post.tags" v-bind:href="'/#/tags/'+ tag.id" v-on:click="route(tag)"> {{ tag.title }} </a></li>
                             <li>|</li>
                             <li><i class="fa fa-comments"></i>{{ post.comment_count }}</li>
                         </ul>
@@ -370,15 +370,15 @@
                 </div>
                 <div class="col-md-12">
                     <div class="blog-text">
-                        <h3 class="title text-capitalize text-weight-700"><a href="#">{{ post.title }}</a></h3>
+                        <h3 class="title text-capitalize text-weight-700"><a  v-on:click="setCurrentPost(post)" data-toggle="modal" data-target="#postModal">{{ post.title }}</a></h3>
                         <ul class="meta-tags">
-                            <li><i class="fa fa-calendar"></i> <a>{{ post.created_at }}</a></li>
+                            <li><i class="fa fa-calendar"></i> {{ post.created_at }}</li>
                             <li>|</li>
                             <li><i class="fa fa-user"></i> <a v-for="user in users" v-if="user.id == post.user_id" v-bind:href="'/#/users/'+post.user_id">{{ user.full_name }}</a></li>
                             <li>|</li>
-                            <li><i class="fa fa-tags"></i> <a href="#" v-for="tag in post.tags">{{ tag.title }}</a></a></li>
+                            <li><i class="fa fa-tags"></i> {{ tag.title }}</li>
                             <li>|</li>
-                            <li><i class="fa fa-comments"></i> <a href="#">{{ post.comment_count }}</a></li>
+                            <li><i class="fa fa-comments"></i> {{ post.comment_count }}</li>
                         </ul>
                         <p>{{ post.pitch }}</p>
                         <a v-on:click="setCurrentPost(post)" class="btn btn-base" data-toggle="modal" data-target="#postModal">Read More</a>
