@@ -25,3 +25,9 @@
 .btn-primary {
   margin-bottom: 10px;
 }
+
+footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+}
